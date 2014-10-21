@@ -117,6 +117,4 @@ class Snake : NSObject{
         
         
     }
-    
-    
 }
