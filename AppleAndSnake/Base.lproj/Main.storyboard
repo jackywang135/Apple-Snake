@@ -16,12 +16,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="nw4-L3-IBl" appends="YES" id="BXR-2W-dNw"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="gameView" destination="8bC-Xf-vdC" id="XHY-Fo-q6j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="right" id="nw4-L3-IBl">
+                    <connections>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="V9w-vY-b7h"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="248" y="429"/>
         </scene>

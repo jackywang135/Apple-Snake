@@ -26,8 +26,8 @@ class GameView : UIView {
     }
     
     override func drawRect(rect: CGRect) {
+        
         //Get Snake
-
         var snake = delegate!.snakeForGameView(self)
         var apple = delegate!.appleForGameView(self)
         
@@ -56,12 +56,28 @@ class GameView : UIView {
             self.addSubview(snakeBodyImageView)
         }
         
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//            
+//            
+//            })
+        
+//        for snakeBody in snake.body[1..<snake.length] {
+//            let str : NSString = "🐍"
+//            str.drawAtPoint(snakeBody.origin, withAttributes: [NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width))])
+//        }
+        
         //Apple 
         let appleLabel = UILabel(frame: CGRectMake(apple.frame.origin.x, apple.frame.origin.y, apple.frame.size.width + CGFloat(10), apple.frame.size.height + CGFloat(10))) //+10 frame size to avoid image being cut off
         appleLabel.attributedText = NSAttributedString.init(string: "🍎")
         self.addSubview(appleLabel)
         
+        
+        
 
 
+    }
+    
+    override func willRemoveSubview(subview: UIView) {
+        
     }
 }
