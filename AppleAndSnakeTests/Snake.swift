@@ -16,40 +16,42 @@ enum Direction {
 
 class Snake : NSObject{
     
-    var length : Float {
-        didSet {
-            if length < 2 {
-                self.length = 2
-            }
+    
+    // MARK: Initializer
+    init(length:Int, direction:Direction, snakeHeadRect:CGRect){
+        if length < 2 {
+            self.length = 2
+        } else {
+            self.length = length
         }
-
+        
+        self.currentDirection = direction
+        
+        if (snakeHeadRect.size.height < 8 || snakeHeadRect.size.width < 8) {
+            let snakeHeadPoint = snakeHeadRect.origin
+            let newSnakeHeadRect : CGRect = CGRectMake(snakeHeadPoint.x, snakeHeadPoint.y, 8, 8)
+            self.snakeBody.append(newSnakeHeadRect)
+        } else {
+            self.snakeBody.append(snakeHeadRect)
+        }
     }
     
-    var width : Float {
-        get {
-            return Float(self.snakeHead.size.width)
-        }
-        set {
-            if (width < 8) {
-                self.width = 8
-           }
-        }
-    }
-    
+    // MARK: Variables
+    var length : Int
     var currentDirection : Direction!
-    var snakeBody = [CGRect]()
     var snakeHead : CGRect {
         get {
             return self.snakeBody.first!
         }
 
     }
-    
-    init(length:Float, direction:Direction, width:float snakeHeadPosition:CGPoint){
-        //super.init()
-        self.length = length
-        self.currentDirection = direction
-        self.snakeBody.append(snakeHeadRect)
+    var snakeBody = [CGRect]()
+    var width : CGFloat {
+        get {
+            return self.snakeHead.size.width
+        }
     }
+    
+
     
 }

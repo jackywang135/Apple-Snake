@@ -36,12 +36,12 @@ class AppleAndSnakeTests: XCTestCase {
     
     func testSnakeGetWidth(){
         var snake : Snake = Snake(length:1, direction:Direction.south, snakeHeadRect:CGRectMake(100, 100, 5, 5))
-        XCTAssertEqual(16, snake.width, "Width from snake incorrect")
+        XCTAssertEqual(CGFloat(8), snake.width, "Width from snake incorrect")
     }
     
     func testAccessSnakeHead() {
         var snake : Snake = Snake(length:1, direction:Direction.south, snakeHeadRect:CGRectMake(100, 100, 5, 5))
-        XCTAssertEqual(snake.snakeHead, CGRectMake(100, 100, 16, 16), "Should be able to get head")
+        XCTAssertEqual(snake.snakeHead, CGRectMake(100, 100, 8, 8), "Should be able to get head")
     }
     
     func testGetDirection() {
@@ -49,13 +49,13 @@ class AppleAndSnakeTests: XCTestCase {
         XCTAssertEqual(snake.currentDirection, Direction.south, "Direction not correct")
     }
 
-    func testSetWidthSmallerThan2() {
+    func testSetLengthSmallerThan2() {
         var snake : Snake = Snake(length:1, direction:Direction.south, snakeHeadRect:CGRectMake(100, 100, 5, 5))
         XCTAssertEqual(snake.length, 2, "Length should be set to 2")
     }
     
     func testSnakeWidthSmallerThan8 (){
         var snake : Snake = Snake(length:1, direction:Direction.south, snakeHeadRect:CGRectMake(100, 100, 5, 5))
-        XCTAssertEqual(snake.width, 8, "Width should be set to 8")
+        XCTAssertEqual(snake.width, CGFloat(8), "Width should be set to 8")
     }
 }
