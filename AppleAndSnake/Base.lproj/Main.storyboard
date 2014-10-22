@@ -19,6 +19,9 @@
                         <gestureRecognizers/>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="nw4-L3-IBl" appends="YES" id="BXR-2W-dNw"/>
+                            <outletCollection property="gestureRecognizers" destination="54N-YW-ntZ" appends="YES" id="Ypg-RD-xin"/>
+                            <outletCollection property="gestureRecognizers" destination="2cH-wM-7qv" appends="YES" id="qUs-GP-C3V"/>
+                            <outletCollection property="gestureRecognizers" destination="hKH-Mc-MRy" appends="YES" id="JK3-Cz-cby"/>
                         </connections>
                     </view>
                     <connections>
@@ -28,7 +31,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="nw4-L3-IBl">
                     <connections>
-                        <action selector="swipe:" destination="BYZ-38-t0r" id="V9w-vY-b7h"/>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="3oc-2L-rJc"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="54N-YW-ntZ">
+                    <connections>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="m1P-fo-8vi"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="down" id="2cH-wM-7qv">
+                    <connections>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="9wV-U1-18x"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="up" id="hKH-Mc-MRy">
+                    <connections>
+                        <action selector="swipe:" destination="BYZ-38-t0r" id="QSC-eu-rbl"/>
                     </connections>
                 </swipeGestureRecognizer>
             </objects>

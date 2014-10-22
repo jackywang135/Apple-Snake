@@ -11,8 +11,10 @@ import UIKit
 
 class Apple {
     
+    //Property
     var frame : CGRect
     
+    //Initailizer
     init(frame:CGRect) {
         self.frame = frame
     }

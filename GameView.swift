@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-
+//MARK: Protocol
 
 protocol GameViewDelegate {
     
@@ -19,13 +19,24 @@ protocol GameViewDelegate {
 
 class GameView : UIView {
 
+    //MARK: Properties
+    
     var delegate : GameViewDelegate?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
-    override func drawRect(rect: CGRect) {
+    //MARK: Methods
+    
+    override func layoutSubviews() {
+        
+        //MARK: Remove all subviews
+        for view in self.subviews {
+            view.removeFromSuperview();
+        }
+        
+        //MARK: Redraw subviews
         
         //Get Snake
         var snake = delegate!.snakeForGameView(self)
@@ -35,7 +46,8 @@ class GameView : UIView {
         let snakeHeadImage = UIImage(named: "SnakeHead.png")
         var snakeHeadImageView = UIImageView(frame: snake.head)
         snakeHeadImageView.image = snakeHeadImage
-            //Snake Head Direction
+        
+        //Snake Head Direction
         switch snake.currentDirection {
         case .north:
             break;
@@ -44,10 +56,10 @@ class GameView : UIView {
         case .east:
             snakeHeadImageView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI/2))
         case .west:
-            snakeHeadImageView.transform = CGAffineTransformMakeRotation(CGFloat(3*M_PI/4))
+            snakeHeadImageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI/2))
         }
         self.addSubview(snakeHeadImageView)
-        
+
         //Snake Body
         let snakeBodyImage = UIImage(named: "SnakeBody.png")
         for snakeBody in snake.body[1..<snake.length] {
@@ -56,28 +68,9 @@ class GameView : UIView {
             self.addSubview(snakeBodyImageView)
         }
         
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.1 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//            
-//            
-//            })
-        
-//        for snakeBody in snake.body[1..<snake.length] {
-//            let str : NSString = "🐍"
-//            str.drawAtPoint(snakeBody.origin, withAttributes: [NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width))])
-//        }
-        
-        //Apple 
-        let appleLabel = UILabel(frame: CGRectMake(apple.frame.origin.x, apple.frame.origin.y, apple.frame.size.width + CGFloat(10), apple.frame.size.height + CGFloat(10))) //+10 frame size to avoid image being cut off
-        appleLabel.attributedText = NSAttributedString.init(string: "🍎")
+        //Draw Apple
+        let appleLabel = UILabel(frame: CGRectMake(apple.frame.origin.x, apple.frame.origin.y, apple.frame.size.width, apple.frame.size.height))
+        appleLabel.attributedText = NSAttributedString.init(string: "🍎", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width - 4))]) //-4 to prevent apple being cut off
         self.addSubview(appleLabel)
-        
-        
-        
-
-
-    }
-    
-    override func willRemoveSubview(subview: UIView) {
-        
     }
 }

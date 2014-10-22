@@ -8,15 +8,31 @@
 
 import Foundation
 import CoreGraphics
-import Darwin
+
+// MARK: Type Definition
 
 enum Direction {
     case  east, south, west, north
 }
 
-class Snake : NSObject{
+extension Direction {
+    func opposite() -> Direction {
+        switch self {
+        case .north:
+            return .south
+        case .east:
+            return .west
+        case .south:
+            return .north
+        case .west:
+            return .east
+        }
+    }
+}
+
+class Snake : NSObject {
     
-    // MARK: Variables
+    // MARK: Properties
     
     var length : Int {
         get {
@@ -39,7 +55,7 @@ class Snake : NSObject{
 
     // MARK: Initializer
     
-    init(length:Int, direction:Direction, snakeHeadRect:CGRect){
+    init (length:Int, direction:Direction, snakeHeadRect:CGRect) {
    
         self.currentDirection = direction
         self.body.append(snakeHeadRect)
@@ -48,24 +64,23 @@ class Snake : NSObject{
         assert(snakeHeadRect.size.height >= 8 || snakeHeadRect.size.width >= 8 || snakeHeadRect.size.height != snakeHeadRect.size.width , "SnakeHeadRect.height and .width must be greater than 8 and equal")
         
         //Create Body After Parameters given
-        func getWidth () -> Int {return Int(snakeHeadRect.size.width)}
-        for bodyIndex in 1...length-1 {
+        let getWidth = Int(snakeHeadRect.size.width)
+        for bodyIndex in 1..<length {
     
             var newBodyPoint : CGPoint?
-            var newBodyRect : CGRect?
             
             switch direction {
             case .north:
-                newBodyPoint = CGPointMake(snakeHeadRect.origin.x, snakeHeadRect.origin.y + CGFloat(getWidth() * bodyIndex))
+                newBodyPoint = CGPointMake(snakeHeadRect.origin.x, snakeHeadRect.origin.y + CGFloat(getWidth * bodyIndex))
             case .south:
-                newBodyPoint = CGPointMake(snakeHeadRect.origin.x, snakeHeadRect.origin.y - CGFloat(getWidth() * bodyIndex))
+                newBodyPoint = CGPointMake(snakeHeadRect.origin.x, snakeHeadRect.origin.y - CGFloat(getWidth * bodyIndex))
             case .east:
-                newBodyPoint = CGPointMake(snakeHeadRect.origin.x - CGFloat(getWidth() * bodyIndex), snakeHeadRect.origin.y)
+                newBodyPoint = CGPointMake(snakeHeadRect.origin.x - CGFloat(getWidth * bodyIndex), snakeHeadRect.origin.y)
             case .west:
-                newBodyPoint = CGPointMake(snakeHeadRect.origin.x + CGFloat(getWidth() * bodyIndex), snakeHeadRect.origin.y)
+                newBodyPoint = CGPointMake(snakeHeadRect.origin.x + CGFloat(getWidth * bodyIndex), snakeHeadRect.origin.y)
             }
-            newBodyRect = CGRectMake(newBodyPoint!.x, newBodyPoint!.y, CGFloat(getWidth()), CGFloat(getWidth()))
-            self.body.append(newBodyRect!)
+            var newBodyRect = CGRectMake(newBodyPoint!.x, newBodyPoint!.y, CGFloat(getWidth), CGFloat(getWidth))
+            self.body.append(newBodyRect)
         }
     }
 
@@ -74,15 +89,8 @@ class Snake : NSObject{
     // MARK: Methods 
     
     func changeDirection(newDirection:Direction) {
-        switch newDirection {
-        case .north:
-            if self.currentDirection != .south { self.currentDirection = newDirection }
-        case .east:
-            if self.currentDirection != .west { self.currentDirection = newDirection }
-        case .south:
-            if self.currentDirection != .north { self.currentDirection = newDirection }
-        case .west:
-            if self.currentDirection != .east { self.currentDirection = newDirection }
+        if newDirection != self.currentDirection.opposite() {
+            self.currentDirection = newDirection
         }
     }
     
