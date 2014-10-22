@@ -33,14 +33,24 @@ class GameView : UIView {
         
         //MARK: Remove all subviews
         for view in self.subviews {
-            view.removeFromSuperview();
+            if (view is UIImageView || view is UILabel) {
+                view.removeFromSuperview()
+            }
         }
-        
+    
         //MARK: Redraw subviews
         
         //Get Snake
         var snake = delegate!.snakeForGameView(self)
         var apple = delegate!.appleForGameView(self)
+        
+        //Snake Body
+        let snakeBodyImage = UIImage(named: "SnakeBody.png")
+        for snakeBody in snake.body[1..<snake.length] {
+            var snakeBodyImageView = UIImageView(frame: snakeBody)
+            snakeBodyImageView.image = snakeBodyImage
+            self.addSubview(snakeBodyImageView)
+        }
         
         //Snake Head
         let snakeHeadImage = UIImage(named: "SnakeHead.png")
@@ -59,18 +69,12 @@ class GameView : UIView {
             snakeHeadImageView.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI/2))
         }
         self.addSubview(snakeHeadImageView)
-
-        //Snake Body
-        let snakeBodyImage = UIImage(named: "SnakeBody.png")
-        for snakeBody in snake.body[1..<snake.length] {
-            var snakeBodyImageView = UIImageView(frame: snakeBody)
-            snakeBodyImageView.image = snakeBodyImage
-            self.addSubview(snakeBodyImageView)
-        }
         
         //Draw Apple
         let appleLabel = UILabel(frame: CGRectMake(apple.frame.origin.x, apple.frame.origin.y, apple.frame.size.width, apple.frame.size.height))
         appleLabel.attributedText = NSAttributedString.init(string: "🍎", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width - 4))]) //-4 to prevent apple being cut off
         self.addSubview(appleLabel)
     }
+    
+    
 }

@@ -8,12 +8,30 @@
 
 import UIKit
 
+enum Speed {
+    case Slow, Medium, Fast
+}
+
+extension Speed {
+    func getSeconds() -> Float {
+        switch self {
+        case Slow:
+            return 0.2
+        case Medium:
+            return 0.1
+        case Fast:
+            return 0.05
+        }
+    }
+}
+
 class ViewController: UIViewController, GameViewDelegate {
     
-    
     // MARK: Properties
-    
+    @IBOutlet weak var buttonNewGame: UIButton!
+    @IBOutlet var buttonSpeed: [UIButton]!
     @IBOutlet var gameView: GameView!
+    
     var snake : Snake?
     var apple : Apple?
     var timer : NSTimer?
@@ -25,41 +43,60 @@ class ViewController: UIViewController, GameViewDelegate {
         super.init(coder: aDecoder)
     }
     
-    //MARK: Methods
+    // MARK: Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         gameView.delegate = self
-        gameView.backgroundColor = UIColor.blackColor()
-        self.startGame()
+        for button in buttonSpeed {
+            button.hidden = true
+        }
+        
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: Game Logics
+    // MARK: Buttons
+    
+    @IBAction func newGameAction(sender: UIButton) {
+        buttonNewGame.hidden = true
+        for button in buttonSpeed {
+            button.hidden = false
+        }
+    }
+    
+    @IBAction func buttonSpeedAction(sender: UIButton) {
+         self.startGame()
+    }
+    
+    
+    // MARK: Game Logics
     
     func startGame () {
+        
+        self.allocSnakeAndApple()
         score = 0
-        snake = nil
-        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(160, 160, 16, 16))
-        apple = nil
         timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "timerMethod:", userInfo: nil, repeats: true)
-        self.plantNewApple()
     }
     
     func timerMethod(sender:NSTimer) {
         self.snake!.move()
         self.checkSnakeStatus()
-        gameView.setNeedsLayout()
+        gameView!.setNeedsLayout()
         
     }
     
     func gameOver () {
         timer!.invalidate()
+    }
+    
+    func allocSnakeAndApple() {
+        snake = nil
+        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(160, 160, 16, 16))
+        self.plantNewApple()
     }
     
 
@@ -73,9 +110,9 @@ class ViewController: UIViewController, GameViewDelegate {
         var randomY = Int(arc4random()) % Int(gameView!.frame.size.height)
         
         randomX = randomX / snake!.width * snake!.width
-        randomY = randomX / snake!.width * snake!.width
+        randomY = randomY / snake!.width * snake!.width
         
-        let appleRect = CGRectMake(CGFloat(randomX), CGFloat(randomX), CGFloat(self.snake!.width), CGFloat(self.snake!.width))
+        let appleRect = CGRectMake(CGFloat(randomX), CGFloat(randomY), CGFloat(self.snake!.width), CGFloat(self.snake!.width))
         
         for body in self.snake!.body {
             if body.origin == appleRect.origin {
@@ -112,8 +149,8 @@ class ViewController: UIViewController, GameViewDelegate {
     }
     
     func didSnakeHitWall(point:CGPoint) -> Bool {
-        let wallWidth = Int(gameView.frame.size.width) / snake!.width * snake!.width
-        let wallHeight = Int(gameView.frame.size.height) / snake!.width * snake!.width
+        let wallWidth = Int(gameView!.frame.size.width) / snake!.width * snake!.width
+        let wallHeight = Int(gameView!.frame.size.height) / snake!.width * snake!.width
         return point.x >= CGFloat(wallWidth) || point.x < 0 || point.y >= CGFloat(wallHeight) || point.y < 0
     }
     
@@ -169,11 +206,11 @@ class ViewController: UIViewController, GameViewDelegate {
     // MARK: Delegate
     
     func snakeForGameView(gameView: GameView) -> Snake {
-        return self.snake!
+        return snake!
     }
     
     func appleForGameView(gameView: GameView) -> Apple {
-        return self.apple!
+        return apple!
     }
     
 }

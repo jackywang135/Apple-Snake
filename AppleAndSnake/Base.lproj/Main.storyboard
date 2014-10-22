@@ -15,6 +15,69 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC" customClass="GameView" customModule="AppleAndSnake" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVX-vK-LHa">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Slow">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u9w-d0-GxS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpz-He-Xd5">
+                                <rect key="frame" x="0.0" y="200" width="600" height="200"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Medium">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8tx-YN-7gA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yhk-78-fsq">
+                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Fast">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KjN-tK-hUm"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTa-Hj-x6A">
+                                <rect key="frame" x="0.0" y="200" width="600" height="200"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="New Game">
+                                            <attributes>
+                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="newGameAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V3M-NF-oOM"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <connections>
@@ -25,7 +88,11 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="gameView" destination="8bC-Xf-vdC" id="XHY-Fo-q6j"/>
+                        <outlet property="buttonNewGame" destination="pTa-Hj-x6A" id="hRY-mn-EGp"/>
+                        <outlet property="gameView" destination="8bC-Xf-vdC" id="yVf-qu-WFW"/>
+                        <outletCollection property="buttonSpeed" destination="iVX-vK-LHa" collectionClass="NSMutableArray" id="S1c-6J-yz2"/>
+                        <outletCollection property="buttonSpeed" destination="qpz-He-Xd5" collectionClass="NSMutableArray" id="cFO-ya-W1L"/>
+                        <outletCollection property="buttonSpeed" destination="Yhk-78-fsq" collectionClass="NSMutableArray" id="Kuy-q1-dEJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -50,7 +117,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="248" y="429"/>
+            <point key="canvasLocation" x="167" y="279"/>
         </scene>
     </scenes>
 </document>
