@@ -72,18 +72,9 @@ class ViewController: UIViewController, GameViewDelegate {
     
     func setUpLabel() {
         
-        labelScore.text = "Score : 123123" //\(score)"
-        labelScore.font = UIFont.boldSystemFontOfSize(200)
-        labelScore.numberOfLines = 1
-        labelScore.adjustsFontSizeToFitWidth = true
-        labelScore.minimumScaleFactor = 0.1
-        labelScore.baselineAdjustment = .AlignCenters
+        labelScore.text = "Score : \(score)"
         labelScore.textColor = UIColor.whiteColor()
         labelScore.hidden = false
-        labelScore.textAlignment = NSTextAlignment.Center
-        gameView.addSubview(labelScore)
-        labelScore.setNeedsDisplay()
-        
         
     }
     
