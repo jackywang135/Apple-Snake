@@ -73,7 +73,7 @@ class ViewController: UIViewController, GameViewDelegate {
     func setUpLabel() {
         
         labelScore.text = "Score : \(score)"
-        labelScore.textColor = UIColor.whiteColor()
+        //labelScore.textColor = UIColor.whiteColor()
         labelScore.hidden = false
         
     }

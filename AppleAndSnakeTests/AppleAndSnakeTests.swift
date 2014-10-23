@@ -9,8 +9,6 @@
 import UIKit
 import XCTest
 
-
-
 class AppleAndSnakeTests: XCTestCase {
     
     override func setUp() {

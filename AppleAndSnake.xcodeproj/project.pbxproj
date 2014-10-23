@@ -12,10 +12,11 @@
 		C710AE2C19E3B71600B11C09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C710AE2A19E3B71600B11C09 /* Main.storyboard */; };
 		C710AE3119E3B71600B11C09 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = C710AE2F19E3B71600B11C09 /* LaunchScreen.xib */; };
 		C710AE3D19E3B71600B11C09 /* AppleAndSnakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710AE3C19E3B71600B11C09 /* AppleAndSnakeTests.swift */; };
-		C710AE4719E3B9D600B11C09 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710AE4619E3B9D600B11C09 /* Snake.swift */; };
-		C710AE4819E3B9D600B11C09 /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710AE4619E3B9D600B11C09 /* Snake.swift */; };
 		C739467619F65AA7008847D2 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739467519F65AA7008847D2 /* Apple.swift */; };
 		C755059E19F90A850023D87E /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059D19F90A850023D87E /* GameView.swift */; };
+		C75505A019F90B6C0023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
+		C75505A319F90BF00023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
+		C75505A519F90C3B0023D87E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C75505A419F90C3B0023D87E /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,9 +39,10 @@
 		C710AE3619E3B71600B11C09 /* AppleAndSnakeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppleAndSnakeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C710AE3B19E3B71600B11C09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C710AE3C19E3B71600B11C09 /* AppleAndSnakeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAndSnakeTests.swift; sourceTree = "<group>"; };
-		C710AE4619E3B9D600B11C09 /* Snake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Snake.swift; path = AppleAndSnakeTests/Snake.swift; sourceTree = SOURCE_ROOT; };
 		C739467519F65AA7008847D2 /* Apple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apple.swift; sourceTree = "<group>"; };
 		C755059D19F90A850023D87E /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
+		C755059F19F90B6C0023D87E /* Snake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
+		C75505A419F90C3B0023D87E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,11 +85,12 @@
 			isa = PBXGroup;
 			children = (
 				C710AE2619E3B71600B11C09 /* AppDelegate.swift */,
-				C710AE4619E3B9D600B11C09 /* Snake.swift */,
+				C755059F19F90B6C0023D87E /* Snake.swift */,
 				C739467519F65AA7008847D2 /* Apple.swift */,
 				C755059D19F90A850023D87E /* GameView.swift */,
 				C710AE2819E3B71600B11C09 /* ViewController.swift */,
 				C710AE2A19E3B71600B11C09 /* Main.storyboard */,
+				C75505A419F90C3B0023D87E /* Images.xcassets */,
 				C710AE2F19E3B71600B11C09 /* LaunchScreen.xib */,
 				C710AE2419E3B71600B11C09 /* Supporting Files */,
 			);
@@ -199,6 +202,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C75505A519F90C3B0023D87E /* Images.xcassets in Resources */,
 				C710AE2C19E3B71600B11C09 /* Main.storyboard in Resources */,
 				C710AE3119E3B71600B11C09 /* LaunchScreen.xib in Resources */,
 			);
@@ -220,7 +224,7 @@
 			files = (
 				C710AE2919E3B71600B11C09 /* ViewController.swift in Sources */,
 				C710AE2719E3B71600B11C09 /* AppDelegate.swift in Sources */,
-				C710AE4719E3B9D600B11C09 /* Snake.swift in Sources */,
+				C75505A019F90B6C0023D87E /* Snake.swift in Sources */,
 				C739467619F65AA7008847D2 /* Apple.swift in Sources */,
 				C755059E19F90A850023D87E /* GameView.swift in Sources */,
 			);
@@ -230,7 +234,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C710AE4819E3B9D600B11C09 /* Snake.swift in Sources */,
+				C75505A319F90BF00023D87E /* Snake.swift in Sources */,
 				C710AE3D19E3B71600B11C09 /* AppleAndSnakeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
