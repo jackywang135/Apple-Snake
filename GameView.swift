@@ -15,6 +15,7 @@ protocol GameViewDelegate {
     
     func snakeForGameView(gameView: GameView) -> Snake
     func appleForGameView(gameView: GameView) -> Apple
+    func didGameStart(gameView:GameView) -> Bool
 }
 
 class GameView : UIView {
@@ -30,6 +31,8 @@ class GameView : UIView {
     //MARK: Methods
     
     override func layoutSubviews() {
+        
+        if delegate!.didGameStart(self) {
         
         //MARK: Remove all subviews
         for view in self.subviews {
@@ -74,7 +77,6 @@ class GameView : UIView {
         let appleLabel = UILabel(frame: CGRectMake(apple.frame.origin.x, apple.frame.origin.y, apple.frame.size.width, apple.frame.size.height))
         appleLabel.attributedText = NSAttributedString.init(string: "🍎", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width - 4))]) //-4 to prevent apple being cut off
         self.addSubview(appleLabel)
+        }
     }
-    
-    
 }

@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,22 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iVX-vK-LHa">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Slow">
-                                            <attributes>
-                                                <font key="NSFont" size="15" name="HelveticaNeue-Bold"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u9w-d0-GxS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpz-He-Xd5">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qpz-He-Xd5">
                                 <rect key="frame" x="0.0" y="200" width="600" height="200"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -46,7 +33,7 @@
                                     <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8tx-YN-7gA"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yhk-78-fsq">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yhk-78-fsq">
                                 <rect key="frame" x="0.0" y="400" width="600" height="200"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -61,7 +48,7 @@
                                     <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KjN-tK-hUm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTa-Hj-x6A">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pTa-Hj-x6A">
                                 <rect key="frame" x="0.0" y="200" width="600" height="200"/>
                                 <state key="normal">
                                     <attributedString key="attributedTitle">
@@ -77,9 +64,38 @@
                                     <action selector="newGameAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V3M-NF-oOM"/>
                                 </connections>
                             </button>
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVX-vK-LHa">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="EMd-Pk-KcR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="Slow"/>
+                                <connections>
+                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="u9w-d0-GxS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="iVX-vK-LHa" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="261-xM-5Y6"/>
+                            <constraint firstItem="qpz-He-Xd5" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="A62-7z-iIG"/>
+                            <constraint firstItem="qpz-He-Xd5" firstAttribute="firstBaseline" secondItem="pTa-Hj-x6A" secondAttribute="baseline" id="BoM-ct-Q0e"/>
+                            <constraint firstItem="Yhk-78-fsq" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="HXJ-Ac-rhn"/>
+                            <constraint firstItem="iVX-vK-LHa" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="IcK-hw-eaX"/>
+                            <constraint firstItem="iVX-vK-LHa" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JId-Ja-Jlq"/>
+                            <constraint firstItem="qpz-He-Xd5" firstAttribute="top" secondItem="pTa-Hj-x6A" secondAttribute="top" id="M9r-lb-v2h"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Yhk-78-fsq" secondAttribute="bottom" id="Sh6-YZ-FE9"/>
+                            <constraint firstItem="Yhk-78-fsq" firstAttribute="top" secondItem="qpz-He-Xd5" secondAttribute="bottom" id="W7n-Yv-lgO"/>
+                            <constraint firstItem="qpz-He-Xd5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="YMZ-jT-XvP"/>
+                            <constraint firstItem="qpz-He-Xd5" firstAttribute="baseline" secondItem="pTa-Hj-x6A" secondAttribute="firstBaseline" id="emJ-DF-DIw"/>
+                            <constraint firstItem="pTa-Hj-x6A" firstAttribute="top" secondItem="iVX-vK-LHa" secondAttribute="bottom" id="fND-5e-fkO"/>
+                            <constraint firstItem="iVX-vK-LHa" firstAttribute="leading" secondItem="pTa-Hj-x6A" secondAttribute="leading" id="fkr-jz-yNT"/>
+                            <constraint firstItem="iVX-vK-LHa" firstAttribute="leading" secondItem="Yhk-78-fsq" secondAttribute="leading" id="hIq-aY-4fK"/>
+                            <constraint firstItem="iVX-vK-LHa" firstAttribute="leading" secondItem="qpz-He-Xd5" secondAttribute="leading" id="juO-Dt-21S"/>
+                            <constraint firstItem="pTa-Hj-x6A" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="uhM-P2-FRn"/>
+                        </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="nw4-L3-IBl" appends="YES" id="BXR-2W-dNw"/>
                             <outletCollection property="gestureRecognizers" destination="54N-YW-ntZ" appends="YES" id="Ypg-RD-xin"/>

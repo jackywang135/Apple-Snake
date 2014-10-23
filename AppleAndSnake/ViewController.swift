@@ -7,13 +7,20 @@
 //
 
 import UIKit
+import Darwin
 
-enum Speed {
-    case Slow, Medium, Fast
+enum Speed : String, Printable {
+    case Slow = "Slow", Medium = "Medium", Fast = "Fast"
+    var description : String {
+        get {
+            return self.rawValue
+        }
+    }
 }
 
 extension Speed {
-    func getSeconds() -> Float {
+    
+    func getSeconds() -> Double {
         switch self {
         case Slow:
             return 0.2
@@ -36,11 +43,13 @@ class ViewController: UIViewController, GameViewDelegate {
     var apple : Apple?
     var timer : NSTimer?
     var score : Int?
+    var didGameStart : Bool!
     
     // MARK: Initializers
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        didGameStart = false
     }
     
     // MARK: Methods
@@ -63,23 +72,30 @@ class ViewController: UIViewController, GameViewDelegate {
     
     @IBAction func newGameAction(sender: UIButton) {
         buttonNewGame.hidden = true
-        for button in buttonSpeed {
-            button.hidden = false
-        }
+        areButtonSpeedHidden(false)
     }
     
     @IBAction func buttonSpeedAction(sender: UIButton) {
-         self.startGame()
+        
+        self.startGame(Speed(rawValue:sender.titleLabel!.text!)!)
+        areButtonSpeedHidden(true)
+    }
+    
+    func areButtonSpeedHidden(bool:Bool) {
+        for button in buttonSpeed {
+            button.hidden = bool
+        }
     }
     
     
     // MARK: Game Logics
     
-    func startGame () {
+    func startGame (speed:Speed) {
         
         self.allocSnakeAndApple()
+        didGameStart = true
         score = 0
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.1, target: self, selector: "timerMethod:", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(speed.getSeconds(), target: self, selector: "timerMethod:", userInfo: nil, repeats: true)
     }
     
     func timerMethod(sender:NSTimer) {
@@ -91,6 +107,8 @@ class ViewController: UIViewController, GameViewDelegate {
     
     func gameOver () {
         timer!.invalidate()
+        buttonNewGame.hidden = false
+        didGameStart = false
     }
     
     func allocSnakeAndApple() {
@@ -106,8 +124,8 @@ class ViewController: UIViewController, GameViewDelegate {
         
         apple = nil
         
-        var randomX = Int(arc4random()) % Int(gameView!.frame.size.width)
-        var randomY = Int(arc4random()) % Int(gameView!.frame.size.height)
+        var randomX = Int(arc4random_uniform(UInt32(gameView!.frame.size.width - CGFloat(snake!.width))))
+        var randomY = Int(arc4random_uniform(UInt32(gameView!.frame.size.height-CGFloat(snake!.width))))
         
         randomX = randomX / snake!.width * snake!.width
         randomY = randomY / snake!.width * snake!.width
@@ -116,7 +134,7 @@ class ViewController: UIViewController, GameViewDelegate {
         
         for body in self.snake!.body {
             if body.origin == appleRect.origin {
-                [self.plantNewApple()]
+                self.plantNewApple()
                 return
             }
         }
@@ -151,7 +169,7 @@ class ViewController: UIViewController, GameViewDelegate {
     func didSnakeHitWall(point:CGPoint) -> Bool {
         let wallWidth = Int(gameView!.frame.size.width) / snake!.width * snake!.width
         let wallHeight = Int(gameView!.frame.size.height) / snake!.width * snake!.width
-        return point.x >= CGFloat(wallWidth) || point.x < 0 || point.y >= CGFloat(wallHeight) || point.y < 0
+        return point.x > CGFloat(wallWidth) || point.x < 0 || point.y > CGFloat(wallHeight) || point.y < 0
     }
     
     func didSnakeHitBody(point:CGPoint) -> Bool {
@@ -211,6 +229,10 @@ class ViewController: UIViewController, GameViewDelegate {
     
     func appleForGameView(gameView: GameView) -> Apple {
         return apple!
+    }
+    
+    func didGameStart(gameView:GameView) -> Bool {
+        return didGameStart
     }
     
 }
