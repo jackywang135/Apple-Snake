@@ -38,11 +38,13 @@ class ViewController: UIViewController, GameViewDelegate {
     @IBOutlet weak var buttonNewGame: UIButton!
     @IBOutlet var buttonSpeed: [UIButton]!
     @IBOutlet var gameView: GameView!
+    @IBOutlet var labelScore: UILabel!
+
     
     var snake : Snake?
     var apple : Apple?
     var timer : NSTimer?
-    var score : Int?
+    var score : Int!
     var didGameStart : Bool!
     
     // MARK: Initializers
@@ -66,6 +68,22 @@ class ViewController: UIViewController, GameViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: Labels
+    
+    func setUpLabel() {
+        
+        labelScore.font = UIFont.boldSystemFontOfSize(70)
+        labelScore.numberOfLines = 1
+        labelScore.adjustsFontSizeToFitWidth = true
+        labelScore.text = "Score : \(score)"
+        labelScore.textColor = UIColor.whiteColor()
+        labelScore.hidden = false
+        labelScore.textAlignment = NSTextAlignment.Center
+        gameView.addSubview(labelScore)
+        
+        
+    }
+    
     // MARK: Buttons
     
    func setUpButtons() {
@@ -79,6 +97,7 @@ class ViewController: UIViewController, GameViewDelegate {
     @IBAction func newGameAction(sender: UIButton) {
         buttonNewGame.hidden = true
         areButtonSpeedHidden(false)
+        labelScore.hidden = true
     }
     
     @IBAction func buttonSpeedAction(sender: UIButton) {
@@ -108,13 +127,14 @@ class ViewController: UIViewController, GameViewDelegate {
         self.snake!.move()
         self.checkSnakeStatus()
         gameView!.setNeedsLayout()
-        
     }
     
     func gameOver () {
         timer!.invalidate()
         buttonNewGame.hidden = false
         didGameStart = false
+        setUpLabel()
+        
     }
     
     func allocSnakeAndApple() {

@@ -79,4 +79,13 @@ class GameView : UIView {
         self.addSubview(appleLabel)
         }
     }
+    
+//    override func drawRect(rect: CGRect) {
+//        let var appleStr = "🍎"
+//        
+//        
+//        
+//        
+//        
+//    }
 }
