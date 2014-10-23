@@ -57,10 +57,8 @@ class ViewController: UIViewController, GameViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         gameView.delegate = self
-        for button in buttonSpeed {
-            button.hidden = true
-        }
-        
+        gameView.backgroundColor = UIColor.blackColor()
+        setUpButtons()
     }
     
     override func didReceiveMemoryWarning() {
@@ -69,6 +67,14 @@ class ViewController: UIViewController, GameViewDelegate {
     }
     
     // MARK: Buttons
+    
+   func setUpButtons() {
+        buttonNewGame.titleLabel!.adjustsFontSizeToFitWidth = true
+        for button in buttonSpeed {
+            button.titleLabel!.adjustsFontSizeToFitWidth = true
+        }
+        areButtonSpeedHidden(true)
+    }
     
     @IBAction func newGameAction(sender: UIButton) {
         buttonNewGame.hidden = true
@@ -206,6 +212,8 @@ class ViewController: UIViewController, GameViewDelegate {
     // MARK: Swipe Gesture
     
     @IBAction func swipe(sender: UISwipeGestureRecognizer) {
+        
+        if (didGameStart == true) {
         switch sender.direction {
         case UISwipeGestureRecognizerDirection.Up:
             snake!.changeDirection(.north)
@@ -217,6 +225,7 @@ class ViewController: UIViewController, GameViewDelegate {
             snake!.changeDirection(.east)
         default:
             return
+            }
         }
     }
     
