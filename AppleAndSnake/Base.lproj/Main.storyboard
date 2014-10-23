@@ -20,15 +20,18 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTa-Hj-x6A">
                                 <rect key="frame" x="0.0" y="200" width="600" height="200"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="100"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="70"/>
                                 <state key="normal" title="New Game">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="newGameAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V3M-NF-oOM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMG-nm-HAh">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMG-nm-HAh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -52,7 +55,7 @@
                                     <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yii-2w-7Kj"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zli-4m-VlD">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zli-4m-VlD">
                                 <rect key="frame" x="0.0" y="400" width="600" height="200"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
@@ -75,13 +78,16 @@
                                     <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aKK-wK-Cwd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cms-GB-JlQ">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cms-GB-JlQ">
                                 <rect key="frame" x="0.0" y="200" width="600" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="70"/>
                                 <state key="normal" title="Medium">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=compact" ambiguous="YES">
                                     <rect key="frame" x="0.0" y="133" width="600" height="134"/>
                                 </variation>
@@ -98,9 +104,9 @@
                                     <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nAF-Tp-Jfe"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.0001" translatesAutoresizingMaskIntoConstraints="NO" id="2jD-3W-hpC">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.0001" translatesAutoresizingMaskIntoConstraints="NO" id="2jD-3W-hpC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="300"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="200"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
@@ -123,26 +129,22 @@
                             <constraint firstAttribute="width" secondItem="Zli-4m-VlD" secondAttribute="width" id="84y-Kl-q1p"/>
                             <constraint firstItem="Zli-4m-VlD" firstAttribute="top" secondItem="Cms-GB-JlQ" secondAttribute="bottom" id="9Kf-uD-MMO"/>
                             <constraint firstAttribute="width" secondItem="dMG-nm-HAh" secondAttribute="width" id="CVD-DN-4OZ"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="CuN-P9-oXd"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zli-4m-VlD" secondAttribute="bottom" id="GWU-Ga-xX7"/>
                             <constraint firstItem="dMG-nm-HAh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Gig-Nq-S9S"/>
                             <constraint firstAttribute="height" secondItem="dMG-nm-HAh" secondAttribute="height" multiplier="3:1" id="HGH-hd-goc"/>
                             <constraint firstItem="Cms-GB-JlQ" firstAttribute="top" secondItem="dMG-nm-HAh" secondAttribute="bottom" id="J0U-wB-0ld"/>
-                            <constraint firstAttribute="height" secondItem="2jD-3W-hpC" secondAttribute="height" multiplier="3:1" id="JLj-rW-V7h"/>
                             <constraint firstItem="pTa-Hj-x6A" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="MAR-dB-eEx"/>
                             <constraint firstAttribute="centerY" secondItem="pTa-Hj-x6A" secondAttribute="centerY" id="Qe1-8v-9Sc"/>
+                            <constraint firstItem="2jD-3W-hpC" firstAttribute="height" secondItem="dMG-nm-HAh" secondAttribute="height" id="RKf-CM-vEO"/>
                             <constraint firstAttribute="height" secondItem="Zli-4m-VlD" secondAttribute="height" multiplier="3:1" id="RkL-Tg-L4z"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="leading" secondItem="pTa-Hj-x6A" secondAttribute="leading" id="TqM-Dg-eKJ"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="leading" secondItem="Zli-4m-VlD" secondAttribute="leading" id="TwO-fr-3wN"/>
+                            <constraint firstItem="2jD-3W-hpC" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="T79-bA-7Wc"/>
                             <constraint firstItem="Cms-GB-JlQ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="X2I-ke-sjb"/>
                             <constraint firstItem="Zli-4m-VlD" firstAttribute="top" secondItem="Cms-GB-JlQ" secondAttribute="bottom" id="eEB-jq-sNa"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="leading" secondItem="dMG-nm-HAh" secondAttribute="leading" id="laQ-SA-zvc"/>
+                            <constraint firstItem="2jD-3W-hpC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nDB-8G-HiC"/>
                             <constraint firstAttribute="centerX" secondItem="pTa-Hj-x6A" secondAttribute="centerX" id="nR7-gp-uce"/>
-                            <constraint firstAttribute="width" secondItem="2jD-3W-hpC" secondAttribute="width" id="nu7-d5-4Zh"/>
                             <constraint firstItem="pTa-Hj-x6A" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="oS6-Q3-iZD"/>
                             <constraint firstItem="Cms-GB-JlQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="tnD-86-D87"/>
                             <constraint firstItem="Cms-GB-JlQ" firstAttribute="top" secondItem="dMG-nm-HAh" secondAttribute="bottom" id="xlQ-lP-Cja"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="leading" secondItem="Cms-GB-JlQ" secondAttribute="leading" id="zun-oj-mTK"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="nw4-L3-IBl" appends="YES" id="BXR-2W-dNw"/>

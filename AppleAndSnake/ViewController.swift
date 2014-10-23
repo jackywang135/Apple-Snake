@@ -71,11 +71,8 @@ class ViewController: UIViewController, GameViewDelegate {
     // MARK: Labels
     
     func setUpLabel() {
-        
         labelScore.text = "Score : \(score)"
-        //labelScore.textColor = UIColor.whiteColor()
         labelScore.hidden = false
-        
     }
     
     // MARK: Buttons
