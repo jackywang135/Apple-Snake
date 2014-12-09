@@ -30,6 +30,10 @@ class GameView : UIView {
         super.init(coder: aDecoder)
     }
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
     //MARK: Methods
     
     override func layoutSubviews() {
@@ -82,13 +86,4 @@ class GameView : UIView {
         self.addSubview(appleLabel)
         }
     }
-    
-//    override func drawRect(rect: CGRect) {
-//        let var appleStr = "🍎"
-//        
-//        
-//        
-//        
-//        
-//    }
 }

@@ -1,190 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="tHJ-2L-ve8">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <scene sceneID="qKb-LD-lYL">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AppleAndSnake" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tHJ-2L-ve8" customClass="ViewController" customModule="AppleAndSnake" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="YuS-jv-EDL"/>
+                        <viewControllerLayoutGuide type="bottom" id="DtP-Z6-XPB"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" id="8bC-Xf-vdC" customClass="GameView" customModule="AppleAndSnake" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="VCE-rH-IE9">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pTa-Hj-x6A">
-                                <rect key="frame" x="0.0" y="200" width="600" height="200"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="70"/>
-                                <state key="normal" title="New Game">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="newGameAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="V3M-NF-oOM"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dMG-nm-HAh">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal" title="Slow">
-                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="133"/>
-                                </variation>
-                                <variation key="heightClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="267"/>
-                                </variation>
-                                <variation key="widthClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="800" height="267"/>
-                                </variation>
-                                <connections>
-                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yii-2w-7Kj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zli-4m-VlD">
-                                <rect key="frame" x="0.0" y="400" width="600" height="200"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="100"/>
-                                <state key="normal" title="Fast">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="heightClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="267" width="600" height="133"/>
-                                </variation>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="533" width="600" height="267"/>
-                                </variation>
-                                <variation key="widthClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="400" width="400" height="200"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="533" width="800" height="267"/>
-                                </variation>
-                                <connections>
-                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aKK-wK-Cwd"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cms-GB-JlQ">
-                                <rect key="frame" x="0.0" y="200" width="600" height="200"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="70"/>
-                                <state key="normal" title="Medium">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="133" width="600" height="134"/>
-                                </variation>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="267" width="600" height="266"/>
-                                </variation>
-                                <variation key="widthClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="200" width="400" height="200"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="267" width="800" height="266"/>
-                                </variation>
-                                <connections>
-                                    <action selector="buttonSpeedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nAF-Tp-Jfe"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" ambiguous="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.0001" translatesAutoresizingMaskIntoConstraints="NO" id="2jD-3W-hpC">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="200"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="adjustsFontSizeToFitWidth" value="YES"/>
-                                </userDefinedRuntimeAttributes>
-                                <variation key="heightClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="267"/>
-                                </variation>
-                                <variation key="widthClass=compact" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
-                                </variation>
-                                <variation key="heightClass=regular-widthClass=regular" ambiguous="YES">
-                                    <rect key="frame" x="0.0" y="0.0" width="800" height="267"/>
-                                </variation>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="Zli-4m-VlD" secondAttribute="width" id="84y-Kl-q1p"/>
-                            <constraint firstItem="Zli-4m-VlD" firstAttribute="top" secondItem="Cms-GB-JlQ" secondAttribute="bottom" id="9Kf-uD-MMO"/>
-                            <constraint firstAttribute="width" secondItem="dMG-nm-HAh" secondAttribute="width" id="CVD-DN-4OZ"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Zli-4m-VlD" secondAttribute="bottom" id="GWU-Ga-xX7"/>
-                            <constraint firstItem="dMG-nm-HAh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Gig-Nq-S9S"/>
-                            <constraint firstAttribute="height" secondItem="dMG-nm-HAh" secondAttribute="height" multiplier="3:1" id="HGH-hd-goc"/>
-                            <constraint firstItem="Cms-GB-JlQ" firstAttribute="top" secondItem="dMG-nm-HAh" secondAttribute="bottom" id="J0U-wB-0ld"/>
-                            <constraint firstItem="pTa-Hj-x6A" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="MAR-dB-eEx"/>
-                            <constraint firstAttribute="centerY" secondItem="pTa-Hj-x6A" secondAttribute="centerY" id="Qe1-8v-9Sc"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="height" secondItem="dMG-nm-HAh" secondAttribute="height" id="RKf-CM-vEO"/>
-                            <constraint firstAttribute="height" secondItem="Zli-4m-VlD" secondAttribute="height" multiplier="3:1" id="RkL-Tg-L4z"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="T79-bA-7Wc"/>
-                            <constraint firstItem="Cms-GB-JlQ" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:3" id="X2I-ke-sjb"/>
-                            <constraint firstItem="Zli-4m-VlD" firstAttribute="top" secondItem="Cms-GB-JlQ" secondAttribute="bottom" id="eEB-jq-sNa"/>
-                            <constraint firstItem="2jD-3W-hpC" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="nDB-8G-HiC"/>
-                            <constraint firstAttribute="centerX" secondItem="pTa-Hj-x6A" secondAttribute="centerX" id="nR7-gp-uce"/>
-                            <constraint firstItem="pTa-Hj-x6A" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="oS6-Q3-iZD"/>
-                            <constraint firstItem="Cms-GB-JlQ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="tnD-86-D87"/>
-                            <constraint firstItem="Cms-GB-JlQ" firstAttribute="top" secondItem="dMG-nm-HAh" secondAttribute="bottom" id="xlQ-lP-Cja"/>
-                        </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="nw4-L3-IBl" appends="YES" id="BXR-2W-dNw"/>
-                            <outletCollection property="gestureRecognizers" destination="54N-YW-ntZ" appends="YES" id="Ypg-RD-xin"/>
-                            <outletCollection property="gestureRecognizers" destination="2cH-wM-7qv" appends="YES" id="qUs-GP-C3V"/>
-                            <outletCollection property="gestureRecognizers" destination="hKH-Mc-MRy" appends="YES" id="JK3-Cz-cby"/>
-                        </connections>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="buttonNewGame" destination="pTa-Hj-x6A" id="hRY-mn-EGp"/>
-                        <outlet property="gameView" destination="8bC-Xf-vdC" id="yVf-qu-WFW"/>
-                        <outlet property="labelScore" destination="2jD-3W-hpC" id="J4o-Y6-Uny"/>
-                        <outletCollection property="buttonSpeed" destination="dMG-nm-HAh" collectionClass="NSMutableArray" id="F3f-3r-Ucx"/>
-                        <outletCollection property="buttonSpeed" destination="Cms-GB-JlQ" collectionClass="NSMutableArray" id="cRb-MX-al0"/>
-                        <outletCollection property="buttonSpeed" destination="Zli-4m-VlD" collectionClass="NSMutableArray" id="6MN-wD-mDG"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="nw4-L3-IBl">
-                    <connections>
-                        <action selector="swipe:" destination="BYZ-38-t0r" id="3oc-2L-rJc"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="54N-YW-ntZ">
-                    <connections>
-                        <action selector="swipe:" destination="BYZ-38-t0r" id="m1P-fo-8vi"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="down" id="2cH-wM-7qv">
-                    <connections>
-                        <action selector="swipe:" destination="BYZ-38-t0r" id="9wV-U1-18x"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="up" id="hKH-Mc-MRy">
-                    <connections>
-                        <action selector="swipe:" destination="BYZ-38-t0r" id="QSC-eu-rbl"/>
-                    </connections>
-                </swipeGestureRecognizer>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6S0-X4-Cum" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="11" y="317"/>
+            <point key="canvasLocation" x="-212" y="451"/>
         </scene>
     </scenes>
 </document>
