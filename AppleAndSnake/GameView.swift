@@ -24,6 +24,7 @@ class GameView : UIView {
     //MARK: Properties
     
     var delegate : GameViewDelegate?
+    var appleLabel : UILabel?
     let kAppleLabelTag = 1
     
     required init(coder aDecoder: NSCoder) {
@@ -80,10 +81,16 @@ class GameView : UIView {
         self.addSubview(snakeHeadImageView)
         
         //Draw Apple
-        let appleLabel = UILabel(frame: CGRectMake(apple.frame.origin.x, apple.frame.origin.y, apple.frame.size.width, apple.frame.size.height))
-            appleLabel.tag = kAppleLabelTag
-        appleLabel.attributedText = NSAttributedString.init(string: "🍎", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width - 4))]) //-4 to prevent apple being cut off
-        self.addSubview(appleLabel)
+        appleLabel = UILabel(frame: apple.frame)
+            appleLabel!.tag = kAppleLabelTag
+        appleLabel!.attributedText = NSAttributedString.init(string: "🍎", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width - 4))]) //-4 to prevent apple being cut off
+        self.addSubview(appleLabel!)
+        }
+    }
+    
+    func removeAllSubviews() {
+        for view in subviews {
+            view.removeFromSuperview()
         }
     }
 }

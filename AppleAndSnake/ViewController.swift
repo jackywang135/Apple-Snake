@@ -42,8 +42,8 @@ let buttonSpeedSlowFrame = CGRectMake(0, 0, buttonWidth, buttonHeight)
 let buttonSpeedMediumFrame = CGRectMake(0, screenHeight/3, buttonWidth, buttonHeight)
 let buttonSpeedFastFrame = CGRectMake(0, screenHeight * 2 / 3, buttonWidth, buttonHeight)
 
-let viewAnimateStartFrame = CGRectMake(0, -buttonHeight, buttonWidth, buttonHeight)
-let viewAnimateEndFrame = CGRectMake(0, screenHeight, buttonWidth, buttonHeight)
+let viewAnimateFrameTop = CGRectMake(0, -buttonHeight, buttonWidth, buttonHeight)
+let viewAnimateFrameBottom = CGRectMake(0, screenHeight, buttonWidth, buttonHeight)
 
 let labelScoreFrame = buttonSpeedSlowFrame
 
@@ -87,7 +87,11 @@ class ViewController: UIViewController, GameViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpUI()
-        showButtonNewGame()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        delayClosureWithTime(0.5){ self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: { _ in})}
     }
     
     override func didReceiveMemoryWarning() {
@@ -105,45 +109,47 @@ class ViewController: UIViewController, GameViewDelegate {
     
     func setUpButtons() {
         buttonNewGame = UIButton.buttonWithType(.Custom) as UIButton
-        buttonNewGame.frame = viewAnimateStartFrame
+        buttonNewGame.frame = buttonNewGameFrame
         buttonNewGame.setTitle("New Game", forState: .Normal)
         buttonNewGame.addTarget(self, action: "newGameAction:", forControlEvents: .TouchUpInside)
         buttonNewGame.backgroundColor = UIColor.whiteColor()
         buttonNewGame.setTitleColor(UIColor.blackColor(), forState: .Normal)
         buttonNewGame.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
         view.addSubview(buttonNewGame)
+        buttonNewGame.hidden = true
         
         buttonSpeedSlow = UIButton.buttonWithType(.Custom) as UIButton
-        buttonSpeedSlow.frame = viewAnimateStartFrame
+        buttonSpeedSlow.frame = viewAnimateFrameTop
         buttonSpeedSlow.setTitle("Slow", forState: .Normal)
         buttonSpeedSlow.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
-        buttonSpeedSlow.backgroundColor = UIColor.whiteColor()
-        buttonSpeedSlow.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        buttonSpeedSlow.backgroundColor = UIColor.blackColor()
+        buttonSpeedSlow.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         buttonSpeedSlow.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
         view.addSubview(buttonSpeedSlow)
         
         buttonSpeedMedium = UIButton.buttonWithType(.Custom) as UIButton
-        buttonSpeedMedium.frame = viewAnimateStartFrame
+        buttonSpeedMedium.frame = buttonSpeedMediumFrame
         buttonSpeedMedium.setTitle("Medium", forState: .Normal)
         buttonSpeedMedium.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
-        buttonSpeedMedium.backgroundColor = UIColor.blackColor()
-        buttonSpeedMedium.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        buttonSpeedMedium.backgroundColor = UIColor.whiteColor()
+        buttonSpeedMedium.setTitleColor(UIColor.blackColor(), forState: .Normal)
         buttonSpeedMedium.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
         view.addSubview(buttonSpeedMedium)
+        buttonSpeedMedium.hidden = true
         
         buttonSpeedFast = UIButton.buttonWithType(.Custom) as UIButton
-        buttonSpeedFast.frame = viewAnimateStartFrame
+        buttonSpeedFast.frame = viewAnimateFrameBottom
         buttonSpeedFast.setTitle("Fast", forState: .Normal)
         buttonSpeedFast.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
-        buttonSpeedFast.backgroundColor = UIColor.whiteColor()
-        buttonSpeedFast.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        buttonSpeedFast.backgroundColor = UIColor.blackColor()
+        buttonSpeedFast.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         buttonSpeedFast.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
         view.addSubview(buttonSpeedFast)
         
     }
     
     func setUpLabelScore() {
-        labelScore = UILabel(frame: viewAnimateStartFrame)
+        labelScore = UILabel(frame: viewAnimateFrameTop)
         labelScore.text = "Score : \(score)"
         labelScore.backgroundColor = UIColor.blackColor()
         labelScore.textColor = UIColor.whiteColor()
@@ -175,32 +181,11 @@ class ViewController: UIViewController, GameViewDelegate {
         view.addGestureRecognizer(swipeGestureUp)
     }
     
-    // MARK: Buttons Actions
+    //MARK : Animations
     
-    func newGameAction(sender: UIButton) {
-        animateView(labelScore, newFrame: viewAnimateStartFrame, completion: {
-            self.showButtonSpeeds()        })
-    }
+    let viewAnimationTime = 0.5
     
-    func buttonSpeedAction(sender: UIButton) {
-        animateView(buttonSpeedSlow, newFrame: viewAnimateEndFrame, completion: {
-            self.animateView(self.buttonSpeedMedium, newFrame: viewAnimateEndFrame, completion: {
-                self.animateView(self.buttonSpeedFast, newFrame: viewAnimateEndFrame, completion: {
-                    self.startGame(Speed(rawValue:sender.titleLabel!.text!)!)
-                    
-                })
-            })
-        })
-        buttonNewGame.frame = viewAnimateStartFrame
-        for view in buttonSpeed {
-            view.frame = viewAnimateStartFrame
-        }
-    }
-    
-    //MARK: Animation
-    let viewAnimationTime = 0.3
-    
-    func animateView(view:UIView, newFrame:CGRect, completion:()->()) {
+    func animateView(duration:Double, view:UIView, newFrame:CGRect, completion:()->()) {
         UIView.animateWithDuration(viewAnimationTime, animations: {
             view.superview!.bringSubviewToFront(view)
             view.frame = newFrame }, completion: { (complete:Bool) in
@@ -208,26 +193,38 @@ class ViewController: UIViewController, GameViewDelegate {
         })
     }
     
-    func showButtonNewGame() {
-        animateView(buttonNewGame, newFrame: buttonNewGameFrame, { _ in }) //empty closure
+    func shouldHideButtonNewGame(hide: Bool, duration: Double, completion: ()->()) {
+        buttonNewGame.superview!.bringSubviewToFront(buttonNewGame)
+        UIView.transitionWithView(self.buttonNewGame, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonNewGame.hidden = hide }, completion: { _ in completion()})
     }
     
-    func hideButtonNewGame() {
-        
+    func showSpeedButtons(duration:Double, completion: ()->()) {
+        animateView(viewAnimationTime, view: buttonSpeedFast, newFrame: buttonSpeedFastFrame, completion: { _ in })
+        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { self.buttonSpeedMedium.hidden = false }, completion: nil)
+        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: buttonSpeedSlowFrame, completion: completion)
     }
     
-    func showButtonSpeeds() {
-        self.animateView(self.buttonNewGame, newFrame: viewAnimateEndFrame,completion: {
-            self.animateView(self.buttonSpeedFast, newFrame: buttonSpeedFastFrame, completion: {
-                self.animateView(self.buttonSpeedMedium, newFrame: buttonSpeedMediumFrame, completion: {
-                    self.animateView(self.buttonSpeedSlow, newFrame: buttonSpeedSlowFrame, completion: { _ in })
-                })
-            })
-        })
+    func hideSpeedButtons(duration:Double, completion: ()->()) {
+        animateView(viewAnimationTime, view: buttonSpeedFast, newFrame: viewAnimateFrameBottom, completion: { _ in })
+        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonSpeedMedium.hidden = true }, completion: nil)
+        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: viewAnimateFrameTop, completion: completion)
     }
     
-    func hideButtonSpeeds() {
-        
+    func hideLabelScore(hide: Bool, completion:()->()) {
+        UIView.animateWithDuration(viewAnimationTime, animations: { self.labelScore.frame = hide ? viewAnimateFrameTop : labelScoreFrame }, completion: { _ in completion()})
+    }
+    
+    //MARK: Button Actions
+    
+    func newGameAction(sender: UIButton) {
+        hideLabelScore(true , completion: { _ in})
+        shouldHideButtonNewGame(true, duration: viewAnimationTime, completion: { _ in })
+        showSpeedButtons(viewAnimationTime, { _ in })
+    }
+    
+    func buttonSpeedAction(sender: UIButton) {
+        gameView.removeAllSubviews()
+        hideSpeedButtons(viewAnimationTime, completion: {self.startGame(Speed(rawValue: sender.currentTitle!)!)})
     }
     
     // MARK: Game Logics
@@ -242,16 +239,15 @@ class ViewController: UIViewController, GameViewDelegate {
     func timerMethod(sender:NSTimer) {
         self.snake!.move()
         self.checkSnakeStatus()
-        gameView!.setNeedsLayout()
+        gameView.setNeedsLayout()
     }
     
     func gameOver () {
         timer!.invalidate()
         didGameStart = false
         labelScore.text = "Score : \(score)"
-        animateView(labelScore, newFrame: labelScoreFrame, completion: {
-            self.animateView(self.buttonNewGame, newFrame: buttonNewGameFrame, completion: { _ in })
-        })
+        hideLabelScore(false){
+            self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: { _ in})}
     }
     
     func allocSnakeAndApple() {
@@ -282,6 +278,9 @@ class ViewController: UIViewController, GameViewDelegate {
             }
         }
         apple = Apple(frame: appleRect)
+        if gameView.appleLabel != nil {
+            animateViewPop (Double(1), gameView.appleLabel!)
+        }
     }
     
     //MARK: Snake Manipulation

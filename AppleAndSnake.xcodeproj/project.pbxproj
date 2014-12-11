@@ -17,6 +17,7 @@
 		C75505A019F90B6C0023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
 		C75505A319F90BF00023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
 		C75505A519F90C3B0023D87E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C75505A419F90C3B0023D87E /* Images.xcassets */; };
+		C7D97DE81A3981A6003D42FB /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D97DE71A3981A6003D42FB /* Global.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		C755059D19F90A850023D87E /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		C755059F19F90B6C0023D87E /* Snake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		C75505A419F90C3B0023D87E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		C7D97DE71A3981A6003D42FB /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,13 +87,10 @@
 			isa = PBXGroup;
 			children = (
 				C710AE2619E3B71600B11C09 /* AppDelegate.swift */,
-				C755059F19F90B6C0023D87E /* Snake.swift */,
-				C739467519F65AA7008847D2 /* Apple.swift */,
-				C755059D19F90A850023D87E /* GameView.swift */,
-				C710AE2819E3B71600B11C09 /* ViewController.swift */,
-				C710AE2A19E3B71600B11C09 /* Main.storyboard */,
+				C71B2D191A396C3E006FADD7 /* Model */,
+				C71B2D181A396C37006FADD7 /* View */,
+				C71B2D171A396C2F006FADD7 /* Controller */,
 				C75505A419F90C3B0023D87E /* Images.xcassets */,
-				C710AE2F19E3B71600B11C09 /* LaunchScreen.xib */,
 				C710AE2419E3B71600B11C09 /* Supporting Files */,
 			);
 			path = AppleAndSnake;
@@ -120,6 +119,34 @@
 				C710AE3B19E3B71600B11C09 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C71B2D171A396C2F006FADD7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C710AE2819E3B71600B11C09 /* ViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		C71B2D181A396C37006FADD7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C755059D19F90A850023D87E /* GameView.swift */,
+				C710AE2A19E3B71600B11C09 /* Main.storyboard */,
+				C710AE2F19E3B71600B11C09 /* LaunchScreen.xib */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C71B2D191A396C3E006FADD7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C739467519F65AA7008847D2 /* Apple.swift */,
+				C755059F19F90B6C0023D87E /* Snake.swift */,
+				C7D97DE71A3981A6003D42FB /* Global.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +198,7 @@
 				TargetAttributes = {
 					C710AE2019E3B71600B11C09 = {
 						CreatedOnToolsVersion = 6.0.1;
+						DevelopmentTeam = 5ZTR5AMDM6;
 					};
 					C710AE3519E3B71600B11C09 = {
 						CreatedOnToolsVersion = 6.0.1;
@@ -224,6 +252,7 @@
 			files = (
 				C710AE2919E3B71600B11C09 /* ViewController.swift in Sources */,
 				C710AE2719E3B71600B11C09 /* AppDelegate.swift in Sources */,
+				C7D97DE81A3981A6003D42FB /* Global.swift in Sources */,
 				C75505A019F90B6C0023D87E /* Snake.swift in Sources */,
 				C739467619F65AA7008847D2 /* Apple.swift in Sources */,
 				C755059E19F90A850023D87E /* GameView.swift in Sources */,
@@ -352,9 +381,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AppleAndSnake/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6469e58d-0b9f-459b-a303-cdd3c3b07bae";
 			};
 			name = Debug;
 		};
@@ -362,9 +394,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AppleAndSnake/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "6469e58d-0b9f-459b-a303-cdd3c3b07bae";
 			};
 			name = Release;
 		};
