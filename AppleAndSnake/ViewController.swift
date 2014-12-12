@@ -32,6 +32,8 @@ extension Speed {
     }
 }
 
+let snakeWidth = CGFloat(16)
+
 let screenHeight = UIScreen.mainScreen().bounds.height
 let screenWidth = UIScreen.mainScreen().bounds.width
 
@@ -91,7 +93,7 @@ class ViewController: UIViewController, GameViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        delayClosureWithTime(0.5){ self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: { _ in})}
+        delayClosureWithTime(0.5){ self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: {})}
     }
     
     override func didReceiveMemoryWarning() {
@@ -217,9 +219,9 @@ class ViewController: UIViewController, GameViewDelegate {
     //MARK: Button Actions
     
     func newGameAction(sender: UIButton) {
-        hideLabelScore(true , completion: { _ in})
-        shouldHideButtonNewGame(true, duration: viewAnimationTime, completion: { _ in })
-        showSpeedButtons(viewAnimationTime, { _ in })
+        hideLabelScore(true , completion: {})
+        shouldHideButtonNewGame(true, duration: viewAnimationTime, completion: {})
+        showSpeedButtons(viewAnimationTime, {})
     }
     
     func buttonSpeedAction(sender: UIButton) {
@@ -247,12 +249,12 @@ class ViewController: UIViewController, GameViewDelegate {
         didGameStart = false
         labelScore.text = "Score : \(score)"
         hideLabelScore(false){
-            self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: { _ in})}
+            self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: {})}
     }
     
     func allocSnakeAndApple() {
         snake = nil
-        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(160, 160, 16, 16))
+        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(160, 160, snakeWidth, snakeWidth))
         self.plantNewApple()
     }
     
@@ -277,10 +279,13 @@ class ViewController: UIViewController, GameViewDelegate {
                 return
             }
         }
+        
+        gameView.appleLabel! = AppleLabel(frame: appleRect)
+        gameView.appleLabel!.layoutSubviews()
         apple = Apple(frame: appleRect)
-        if gameView.appleLabel != nil {
-            animateViewPop (Double(1), gameView.appleLabel!)
-        }
+//        if gameView.appleLabel != nil {
+//            animateViewPop (Double(1), gameView.appleLabel!)
+//        }
     }
     
     //MARK: Snake Manipulation
