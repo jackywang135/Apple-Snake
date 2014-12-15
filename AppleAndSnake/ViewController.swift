@@ -36,7 +36,10 @@ let snakeWidth = CGFloat(16)
 
 let buttonHeight = screenHeight/3
 let buttonWidth = screenWidth
-let buttonNewGameFrame = CGRectMake(0, screenHeight/4, buttonWidth, screenHeight/4)
+
+let buttonNewGameHeight = (screenHeight - screenWidth)/2
+
+let buttonNewGameFrame = CGRectMake(0, (screenHeight - screenWidth)/2, buttonWidth, buttonNewGameHeight)
 let buttonSpeedSlowFrame = CGRectMake(0, 0, buttonWidth, buttonHeight)
 let buttonSpeedMediumFrame = CGRectMake(0, screenHeight/3, buttonWidth, buttonHeight)
 let buttonSpeedFastFrame = CGRectMake(0, screenHeight * 2 / 3, buttonWidth, buttonHeight)
@@ -44,7 +47,7 @@ let buttonSpeedFastFrame = CGRectMake(0, screenHeight * 2 / 3, buttonWidth, butt
 let viewAnimateFrameTop = CGRectMake(0, -buttonHeight, buttonWidth, buttonHeight)
 let viewAnimateFrameBottom = CGRectMake(0, screenHeight, buttonWidth, buttonHeight)
 
-let labelScoreFrame = CGRectMake(0, 0, screenWidth, screenHeight/4)
+let labelScoreFrame = CGRectMake(0, 0, screenWidth, buttonNewGameHeight)
 
 let snakeHeadImageViewShowFrame = CGRectMake(0, screenHeight - screenWidth, screenWidth, screenWidth)
 let snakeHeadImageViewHideFrame = CGRectMake(0, screenHeight, screenWidth, screenWidth)
