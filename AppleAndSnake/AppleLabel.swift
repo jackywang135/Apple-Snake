@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 JackyWang. All rights reserved.
 //
 
+//Unused
 import Foundation
 import UIKit
 
@@ -26,6 +27,4 @@ class AppleLabel : UILabel {
         super.layoutSubviews()
         animateViewPop(0.5, self)
     }
-    
-//    appleLabel!.attributedText = NSAttributedString.init(string: "🍎", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width - 4))])
 }

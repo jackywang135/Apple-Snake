@@ -17,7 +17,6 @@
 		C75505A019F90B6C0023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
 		C75505A319F90BF00023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
 		C75505A519F90C3B0023D87E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C75505A419F90C3B0023D87E /* Images.xcassets */; };
-		C78101FA1A3A8FCC00BF2138 /* AppleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78101F91A3A8FCC00BF2138 /* AppleView.swift */; };
 		C78101FC1A3A91F300BF2138 /* AppleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78101FB1A3A91F300BF2138 /* AppleLabel.swift */; };
 		C7D97DE81A3981A6003D42FB /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D97DE71A3981A6003D42FB /* Global.swift */; };
 /* End PBXBuildFile section */
@@ -46,7 +45,6 @@
 		C755059D19F90A850023D87E /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		C755059F19F90B6C0023D87E /* Snake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		C75505A419F90C3B0023D87E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		C78101F91A3A8FCC00BF2138 /* AppleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleView.swift; sourceTree = "<group>"; };
 		C78101FB1A3A91F300BF2138 /* AppleLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppleLabel.swift; sourceTree = "<group>"; };
 		C7D97DE71A3981A6003D42FB /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +134,7 @@
 		C71B2D181A396C37006FADD7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C78101FB1A3A91F300BF2138 /* AppleLabel.swift */,
 				C755059D19F90A850023D87E /* GameView.swift */,
 				C710AE2A19E3B71600B11C09 /* Main.storyboard */,
 				C710AE2F19E3B71600B11C09 /* LaunchScreen.xib */,
@@ -147,8 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				C739467519F65AA7008847D2 /* Apple.swift */,
-				C78101F91A3A8FCC00BF2138 /* AppleView.swift */,
-				C78101FB1A3A91F300BF2138 /* AppleLabel.swift */,
 				C755059F19F90B6C0023D87E /* Snake.swift */,
 				C7D97DE71A3981A6003D42FB /* Global.swift */,
 			);
@@ -258,7 +255,6 @@
 			files = (
 				C710AE2919E3B71600B11C09 /* ViewController.swift in Sources */,
 				C710AE2719E3B71600B11C09 /* AppDelegate.swift in Sources */,
-				C78101FA1A3A8FCC00BF2138 /* AppleView.swift in Sources */,
 				C7D97DE81A3981A6003D42FB /* Global.swift in Sources */,
 				C75505A019F90B6C0023D87E /* Snake.swift in Sources */,
 				C78101FC1A3A91F300BF2138 /* AppleLabel.swift in Sources */,

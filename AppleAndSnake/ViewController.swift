@@ -279,13 +279,7 @@ class ViewController: UIViewController, GameViewDelegate {
                 return
             }
         }
-        
-        gameView.appleLabel! = AppleLabel(frame: appleRect)
-        gameView.appleLabel!.layoutSubviews()
         apple = Apple(frame: appleRect)
-//        if gameView.appleLabel != nil {
-//            animateViewPop (Double(1), gameView.appleLabel!)
-//        }
     }
     
     //MARK: Snake Manipulation
