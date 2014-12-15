@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+let screenHeight = UIScreen.mainScreen().bounds.height
+let screenWidth = UIScreen.mainScreen().bounds.width
+
 func delayClosureWithTime(time:NSTimeInterval, closure:()->()) {
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(time * Double(NSEC_PER_SEC))), dispatch_get_main_queue(), closure)
 }

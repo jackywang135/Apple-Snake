@@ -34,12 +34,9 @@ extension Speed {
 
 let snakeWidth = CGFloat(16)
 
-let screenHeight = UIScreen.mainScreen().bounds.height
-let screenWidth = UIScreen.mainScreen().bounds.width
-
 let buttonHeight = screenHeight/3
 let buttonWidth = screenWidth
-let buttonNewGameFrame = CGRectMake(0, screenHeight/3, buttonWidth, buttonHeight)
+let buttonNewGameFrame = CGRectMake(0, screenHeight/4, buttonWidth, screenHeight/4)
 let buttonSpeedSlowFrame = CGRectMake(0, 0, buttonWidth, buttonHeight)
 let buttonSpeedMediumFrame = CGRectMake(0, screenHeight/3, buttonWidth, buttonHeight)
 let buttonSpeedFastFrame = CGRectMake(0, screenHeight * 2 / 3, buttonWidth, buttonHeight)
@@ -47,7 +44,10 @@ let buttonSpeedFastFrame = CGRectMake(0, screenHeight * 2 / 3, buttonWidth, butt
 let viewAnimateFrameTop = CGRectMake(0, -buttonHeight, buttonWidth, buttonHeight)
 let viewAnimateFrameBottom = CGRectMake(0, screenHeight, buttonWidth, buttonHeight)
 
-let labelScoreFrame = buttonSpeedSlowFrame
+let labelScoreFrame = CGRectMake(0, 0, screenWidth, screenHeight/4)
+
+let snakeHeadImageViewShowFrame = CGRectMake(0, screenHeight - screenWidth, screenWidth, screenWidth)
+let snakeHeadImageViewHideFrame = CGRectMake(0, screenHeight, screenWidth, screenWidth)
 
 
 class ViewController: UIViewController, GameViewDelegate {
@@ -63,6 +63,7 @@ class ViewController: UIViewController, GameViewDelegate {
         }
     }
     
+    var snakeHeadImageView : UIImageView!
     var gameView: GameView!
     var labelScore: UILabel!
 
@@ -88,12 +89,13 @@ class ViewController: UIViewController, GameViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
         setUpUI()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        delayClosureWithTime(0.5){ self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: {})}
+        showButtonNewGame(viewAnimationTime){}
     }
     
     override func didReceiveMemoryWarning() {
@@ -101,12 +103,22 @@ class ViewController: UIViewController, GameViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     func setUpUI() {
+        setUpSwipeGestures()
         setUpGameView()
         setUpButtons()
-        setUpSwipeGestures()
         setUpLabelScore()
-        
+        setUpInitialImageVIew()
+    }
+    
+    func setUpInitialImageVIew() {
+        snakeHeadImageView = UIImageView(image: UIImage(named: "initialImage"))
+        snakeHeadImageView.frame = snakeHeadImageViewShowFrame
+        view.addSubview(snakeHeadImageView)
     }
     
     func setUpButtons() {
@@ -147,7 +159,6 @@ class ViewController: UIViewController, GameViewDelegate {
         buttonSpeedFast.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         buttonSpeedFast.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
         view.addSubview(buttonSpeedFast)
-        
     }
     
     func setUpLabelScore() {
@@ -156,8 +167,8 @@ class ViewController: UIViewController, GameViewDelegate {
         labelScore.backgroundColor = UIColor.blackColor()
         labelScore.textColor = UIColor.whiteColor()
         labelScore.font = UIFont(name: "HelveticaNeue", size: 50)
+        labelScore.textAlignment = NSTextAlignment.Center
         view.addSubview(labelScore)
-        
     }
     
     func setUpGameView() {
@@ -185,48 +196,57 @@ class ViewController: UIViewController, GameViewDelegate {
     
     //MARK : Animations
     
-    let viewAnimationTime = 0.5
+    let viewAnimationTime = 0.4
     
     func animateView(duration:Double, view:UIView, newFrame:CGRect, completion:()->()) {
         UIView.animateWithDuration(viewAnimationTime, animations: {
             view.superview!.bringSubviewToFront(view)
-            view.frame = newFrame }, completion: { (complete:Bool) in
-                completion()
-        })
+            view.frame = newFrame }){ _ in completion()}
     }
     
-    func shouldHideButtonNewGame(hide: Bool, duration: Double, completion: ()->()) {
+    func shouldHideSnakeHead(hide:Bool, duration : Double, completion:()->()) {
+        animateView(duration, view: snakeHeadImageView, newFrame: hide ? snakeHeadImageViewHideFrame : snakeHeadImageViewShowFrame){ _ in completion()}
+    }
+    
+    func showButtonNewGame(duration: Double, completion: ()->()) {
         buttonNewGame.superview!.bringSubviewToFront(buttonNewGame)
-        UIView.transitionWithView(self.buttonNewGame, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonNewGame.hidden = hide }, completion: { _ in completion()})
+        UIView.transitionWithView(self.buttonNewGame, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonNewGame.hidden = false }){ _ in completion()}
+    }
+    
+    func hideButtonNewGame(duration: Double, completion: ()->()) {
+        buttonNewGame.superview!.bringSubviewToFront(buttonNewGame)
+        self.buttonNewGame.hidden = true
     }
     
     func showSpeedButtons(duration:Double, completion: ()->()) {
-        animateView(viewAnimationTime, view: buttonSpeedFast, newFrame: buttonSpeedFastFrame, completion: { _ in })
-        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromBottom, animations: { self.buttonSpeedMedium.hidden = false }, completion: nil)
-        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: buttonSpeedSlowFrame, completion: completion)
+        buttonSpeedFast.frame = buttonSpeedFastFrame
+        self.buttonSpeedMedium.hidden = false
+        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonSpeedMedium.hidden = false }, completion: nil)
+        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: buttonSpeedSlowFrame){ _ in completion()}
     }
     
     func hideSpeedButtons(duration:Double, completion: ()->()) {
-        animateView(viewAnimationTime, view: buttonSpeedFast, newFrame: viewAnimateFrameBottom, completion: { _ in })
-        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonSpeedMedium.hidden = true }, completion: nil)
-        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: viewAnimateFrameTop, completion: completion)
+        animateView(viewAnimationTime, view: buttonSpeedFast, newFrame: viewAnimateFrameBottom){ _ in }
+        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonSpeedMedium.hidden = true }){ _ in }
+        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: viewAnimateFrameTop){ _ in completion()}
     }
     
     func hideLabelScore(hide: Bool, completion:()->()) {
-        UIView.animateWithDuration(viewAnimationTime, animations: { self.labelScore.frame = hide ? viewAnimateFrameTop : labelScoreFrame }, completion: { _ in completion()})
+        UIView.animateWithDuration(viewAnimationTime, animations: { self.labelScore.frame = hide ? viewAnimateFrameTop : labelScoreFrame }){ _ in completion()}
     }
     
     //MARK: Button Actions
     
     func newGameAction(sender: UIButton) {
-        hideLabelScore(true , completion: {})
-        shouldHideButtonNewGame(true, duration: viewAnimationTime, completion: {})
-        showSpeedButtons(viewAnimationTime, {})
+        hideLabelScore(true){}
+        shouldHideSnakeHead(true, duration: 1){}
+        hideButtonNewGame(viewAnimationTime){}
+        showSpeedButtons(viewAnimationTime){}
     }
     
     func buttonSpeedAction(sender: UIButton) {
         gameView.removeAllSubviews()
-        hideSpeedButtons(viewAnimationTime, completion: {self.startGame(Speed(rawValue: sender.currentTitle!)!)})
+        hideSpeedButtons(viewAnimationTime){self.startGame(Speed(rawValue: sender.currentTitle!)!)}
     }
     
     // MARK: Game Logics
@@ -248,8 +268,9 @@ class ViewController: UIViewController, GameViewDelegate {
         timer!.invalidate()
         didGameStart = false
         labelScore.text = "Score : \(score)"
-        hideLabelScore(false){
-            self.shouldHideButtonNewGame(false, duration: self.viewAnimationTime, completion: {})}
+        hideLabelScore(false){}
+        shouldHideSnakeHead(false, duration:1){self.showButtonNewGame(self.viewAnimationTime){}}
+        
     }
     
     func allocSnakeAndApple() {
@@ -310,7 +331,7 @@ class ViewController: UIViewController, GameViewDelegate {
     func didSnakeHitWall(point:CGPoint) -> Bool {
         let wallWidth = Int(gameView!.frame.size.width) / snake!.width * snake!.width
         let wallHeight = Int(gameView!.frame.size.height) / snake!.width * snake!.width
-        return point.x > CGFloat(wallWidth) || point.x < 0 || point.y > CGFloat(wallHeight) || point.y < 0
+        return point.x > screenWidth - snakeWidth || point.x < 0 || point.y > screenHeight - snakeWidth || point.y < 0
     }
     
     func didSnakeHitBody(point:CGPoint) -> Bool {
@@ -364,20 +385,16 @@ class ViewController: UIViewController, GameViewDelegate {
         }
     }
     
-
     // MARK: Delegate
     
     func snakeForGameView(gameView: GameView) -> Snake {
         return snake!
     }
-    
     func appleForGameView(gameView: GameView) -> Apple {
         return apple!
     }
-    
     func didGameStart(gameView:GameView) -> Bool {
         return didGameStart
     }
-    
 }
 
