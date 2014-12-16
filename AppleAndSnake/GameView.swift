@@ -85,7 +85,7 @@ class GameView : UIView {
         let appleLabel = UILabel(frame: apple.frame)
         appleLabel.tag = kAppleLabelTag
         appleLabel.text = "🍎"
-        appleLabel.font = UIFont.systemFontOfSize(snakeWidth - 4)
+        appleLabel.font = UIFont.systemFontOfSize(snakeWidth - 6)
         self.addSubview(appleLabel)
         }
     }
