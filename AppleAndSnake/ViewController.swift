@@ -32,7 +32,7 @@ extension Speed {
     }
 }
 
-let snakeWidth = CGFloat(16)
+let snakeWidth = DeviceModel == .iPad ? CGFloat(32) : DeviceModel == .iPhone6 || DeviceModel == .iPhone6Plus ? CGFloat(18) : CGFloat(16)
 
 let buttonHeight = screenHeight/3
 let buttonWidth = screenWidth
@@ -100,12 +100,7 @@ class ViewController: UIViewController, GameViewDelegate {
         super.viewDidAppear(animated)
         showButtonNewGame(viewAnimationTime){}
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
@@ -278,7 +273,7 @@ class ViewController: UIViewController, GameViewDelegate {
     
     func allocSnakeAndApple() {
         snake = nil
-        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(160, 160, snakeWidth, snakeWidth))
+        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(snakeWidth * 10, snakeWidth * 10, snakeWidth, snakeWidth))
         self.plantNewApple()
     }
     
@@ -290,7 +285,7 @@ class ViewController: UIViewController, GameViewDelegate {
         apple = nil
         
         var randomX = Int(arc4random_uniform(UInt32(gameView!.frame.size.width - CGFloat(snake!.width))))
-        var randomY = Int(arc4random_uniform(UInt32(gameView!.frame.size.height-CGFloat(snake!.width))))
+        var randomY = Int(arc4random_uniform(UInt32(gameView!.frame.size.height - CGFloat(snake!.width))))
         
         randomX = randomX / snake!.width * snake!.width
         randomY = randomY / snake!.width * snake!.width
