@@ -332,9 +332,15 @@ class ViewController: UIViewController, GameViewDelegate {
     }
     
     func didSnakeHitWall(point:CGPoint) -> Bool {
-        let wallWidth = Int(gameView!.frame.size.width) / snake!.width * snake!.width
-        let wallHeight = Int(gameView!.frame.size.height) / snake!.width * snake!.width
-        return point.x > screenWidth - snakeWidth || point.x < 0 || point.y > screenHeight - snakeWidth || point.y < 0
+        
+        func roundToNearestInt(CGF : CGFloat) -> Int {
+            let roundedInt = (CGF - CGFloat(Int(CGF)) < CGFloat(0.5)) ? Int(CGF) : Int(CGF + CGFloat(0.5))
+            return roundedInt
+        }
+        
+        let wallWidth = CGFloat(roundToNearestInt(screenWidth / snakeWidth)) * snakeWidth
+        let wallHeight = CGFloat(roundToNearestInt(screenHeight / snakeWidth)) * snakeWidth
+        return point.x >= wallWidth || point.x < 0 || point.y >= wallHeight || point.y < 0
     }
     
     func didSnakeHitBody(point:CGPoint) -> Bool {
