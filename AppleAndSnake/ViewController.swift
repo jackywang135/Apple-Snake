@@ -32,20 +32,54 @@ extension Speed {
     }
 }
 
+let snakeWidth = DeviceModel == .iPad ? CGFloat(32) : DeviceModel == .iPhone6 || DeviceModel == .iPhone6Plus ? CGFloat(18) : CGFloat(16)
+
+let buttonHeight = screenHeight/3
+let buttonWidth = screenWidth
+
+let buttonNewGameHeight = (screenHeight - screenWidth)/2
+
+let buttonNewGameFrame = CGRectMake(0, (screenHeight - screenWidth)/2, buttonWidth, buttonNewGameHeight)
+let buttonSpeedSlowFrame = CGRectMake(0, 0, buttonWidth, buttonHeight)
+let buttonSpeedMediumFrame = CGRectMake(0, screenHeight/3, buttonWidth, buttonHeight)
+let buttonSpeedFastFrame = CGRectMake(0, screenHeight * 2 / 3, buttonWidth, buttonHeight)
+
+let viewAnimateFrameTop = CGRectMake(0, -buttonHeight, buttonWidth, buttonHeight)
+let viewAnimateFrameBottom = CGRectMake(0, screenHeight, buttonWidth, buttonHeight)
+
+let labelScoreFrame = CGRectMake(0, 0, screenWidth, buttonNewGameHeight)
+
+let snakeHeadImageViewShowFrame = CGRectMake(0, screenHeight - screenWidth, screenWidth, screenWidth)
+let snakeHeadImageViewHideFrame = CGRectMake(0, screenHeight, screenWidth, screenWidth)
+
+
 class ViewController: UIViewController, GameViewDelegate {
     
     // MARK: Properties
-    @IBOutlet weak var buttonNewGame: UIButton!
-    @IBOutlet var buttonSpeed: [UIButton]!
-    @IBOutlet var gameView: GameView!
-    @IBOutlet var labelScore: UILabel!
-
+    var buttonNewGame: UIButton!
+    var buttonSpeedSlow: UIButton!
+    var buttonSpeedMedium: UIButton!
+    var buttonSpeedFast: UIButton!
+    var buttonSpeed : [UIButton]! {
+        get {
+            return [buttonSpeedSlow, buttonSpeedMedium, buttonSpeedFast]
+        }
+    }
     
+    var snakeHeadImageView : UIImageView!
+    var gameView: GameView!
+    var labelScore: UILabel!
+
     var snake : Snake?
     var apple : Apple?
     var timer : NSTimer?
     var score : Int!
     var didGameStart : Bool!
+    
+    var swipeGestureUp : UISwipeGestureRecognizer!
+    var swipeGestureDown : UISwipeGestureRecognizer!
+    var swipeGestureLeft : UISwipeGestureRecognizer!
+    var swipeGestureRight : UISwipeGestureRecognizer!
     
     // MARK: Initializers
     
@@ -58,57 +92,165 @@ class ViewController: UIViewController, GameViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
+        setUpUI()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        showButtonNewGame(viewAnimationTime){}
+    }
+
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    func setUpUI() {
+        setUpSwipeGestures()
+        setUpGameView()
+        setUpButtons()
+        setUpLabelScore()
+        setUpInitialImageVIew()
+    }
+    
+    func setUpInitialImageVIew() {
+        snakeHeadImageView = UIImageView(image: UIImage(named: "initialImage"))
+        snakeHeadImageView.frame = snakeHeadImageViewShowFrame
+        view.addSubview(snakeHeadImageView)
+    }
+    
+    func setUpButtons() {
+        buttonNewGame = UIButton.buttonWithType(.Custom) as UIButton
+        buttonNewGame.frame = buttonNewGameFrame
+        buttonNewGame.setTitle("New Game", forState: .Normal)
+        buttonNewGame.addTarget(self, action: "newGameAction:", forControlEvents: .TouchUpInside)
+        buttonNewGame.backgroundColor = UIColor.whiteColor()
+        buttonNewGame.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        buttonNewGame.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
+        view.addSubview(buttonNewGame)
+        buttonNewGame.hidden = true
+        
+        buttonSpeedSlow = UIButton.buttonWithType(.Custom) as UIButton
+        buttonSpeedSlow.frame = viewAnimateFrameTop
+        buttonSpeedSlow.setTitle("Slow", forState: .Normal)
+        buttonSpeedSlow.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
+        buttonSpeedSlow.backgroundColor = UIColor.blackColor()
+        buttonSpeedSlow.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        buttonSpeedSlow.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
+        view.addSubview(buttonSpeedSlow)
+        
+        buttonSpeedMedium = UIButton.buttonWithType(.Custom) as UIButton
+        buttonSpeedMedium.frame = buttonSpeedMediumFrame
+        buttonSpeedMedium.setTitle("Medium", forState: .Normal)
+        buttonSpeedMedium.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
+        buttonSpeedMedium.backgroundColor = UIColor.whiteColor()
+        buttonSpeedMedium.setTitleColor(UIColor.blackColor(), forState: .Normal)
+        buttonSpeedMedium.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
+        view.addSubview(buttonSpeedMedium)
+        buttonSpeedMedium.hidden = true
+        
+        buttonSpeedFast = UIButton.buttonWithType(.Custom) as UIButton
+        buttonSpeedFast.frame = viewAnimateFrameBottom
+        buttonSpeedFast.setTitle("Fast", forState: .Normal)
+        buttonSpeedFast.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
+        buttonSpeedFast.backgroundColor = UIColor.blackColor()
+        buttonSpeedFast.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        buttonSpeedFast.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
+        view.addSubview(buttonSpeedFast)
+    }
+    
+    func setUpLabelScore() {
+        labelScore = UILabel(frame: viewAnimateFrameTop)
+        labelScore.text = "Score : \(score)"
+        labelScore.backgroundColor = UIColor.blackColor()
+        labelScore.textColor = UIColor.whiteColor()
+        labelScore.font = UIFont(name: "HelveticaNeue", size: 50)
+        labelScore.textAlignment = NSTextAlignment.Center
+        view.addSubview(labelScore)
+    }
+    
+    func setUpGameView() {
+        gameView = GameView(frame: CGRectMake(0, 0, screenWidth, screenHeight))
         gameView.delegate = self
         gameView.backgroundColor = UIColor.blackColor()
-        setUpButtons()
+        view.addSubview(gameView)
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    // MARK: Labels
-    
-    func setUpLabel() {
-        labelScore.text = "Score : \(score)"
-        labelScore.hidden = false
-    }
-    
-    // MARK: Buttons
-    
-   func setUpButtons() {
-        buttonNewGame.titleLabel!.adjustsFontSizeToFitWidth = true
-        for button in buttonSpeed {
-            button.titleLabel!.adjustsFontSizeToFitWidth = true
-        }
-        areButtonSpeedHidden(true)
-    }
-    
-    @IBAction func newGameAction(sender: UIButton) {
-        buttonNewGame.hidden = true
-        areButtonSpeedHidden(false)
-        labelScore.hidden = true
-    }
-    
-    @IBAction func buttonSpeedAction(sender: UIButton) {
+
+    func setUpSwipeGestures() {
+        swipeGestureDown = UISwipeGestureRecognizer(target: self, action: "swipe:")
+        swipeGestureDown.direction = .Down
+        swipeGestureLeft = UISwipeGestureRecognizer(target: self, action: "swipe:")
+        swipeGestureLeft.direction = .Left
+        swipeGestureUp = UISwipeGestureRecognizer(target: self, action: "swipe:")
+        swipeGestureUp.direction = .Up
+        swipeGestureRight = UISwipeGestureRecognizer(target: self, action: "swipe:")
+        swipeGestureRight.direction = .Right
         
-        self.startGame(Speed(rawValue:sender.titleLabel!.text!)!)
-        areButtonSpeedHidden(true)
+        view.addGestureRecognizer(swipeGestureDown)
+        view.addGestureRecognizer(swipeGestureLeft)
+        view.addGestureRecognizer(swipeGestureRight)
+        view.addGestureRecognizer(swipeGestureUp)
     }
     
-    func areButtonSpeedHidden(bool:Bool) {
-        for button in buttonSpeed {
-            button.hidden = bool
-        }
+    //MARK : Animations
+    
+    let viewAnimationTime = 0.4
+    
+    func animateView(duration:Double, view:UIView, newFrame:CGRect, completion:()->()) {
+        UIView.animateWithDuration(viewAnimationTime, animations: {
+            view.superview!.bringSubviewToFront(view)
+            view.frame = newFrame }){ _ in completion()}
     }
     
+    func shouldHideSnakeHead(hide:Bool, duration : Double, completion:()->()) {
+        animateView(duration, view: snakeHeadImageView, newFrame: hide ? snakeHeadImageViewHideFrame : snakeHeadImageViewShowFrame){ _ in completion()}
+    }
+    
+    func showButtonNewGame(duration: Double, completion: ()->()) {
+        buttonNewGame.superview!.bringSubviewToFront(buttonNewGame)
+        UIView.transitionWithView(self.buttonNewGame, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonNewGame.hidden = false }){ _ in completion()}
+    }
+    
+    func hideButtonNewGame(duration: Double, completion: ()->()) {
+        buttonNewGame.superview!.bringSubviewToFront(buttonNewGame)
+        self.buttonNewGame.hidden = true
+    }
+    
+    func showSpeedButtons(duration:Double, completion: ()->()) {
+        buttonSpeedFast.frame = buttonSpeedFastFrame
+        self.buttonSpeedMedium.hidden = false
+        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonSpeedMedium.hidden = false }, completion: nil)
+        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: buttonSpeedSlowFrame){ _ in completion()}
+    }
+    
+    func hideSpeedButtons(duration:Double, completion: ()->()) {
+        animateView(viewAnimationTime, view: buttonSpeedFast, newFrame: viewAnimateFrameBottom){ _ in }
+        UIView.transitionWithView(self.buttonSpeedMedium, duration: viewAnimationTime, options: UIViewAnimationOptions.TransitionFlipFromTop, animations: { self.buttonSpeedMedium.hidden = true }){ _ in }
+        animateView(viewAnimationTime, view: buttonSpeedSlow, newFrame: viewAnimateFrameTop){ _ in completion()}
+    }
+    
+    func hideLabelScore(hide: Bool, completion:()->()) {
+        UIView.animateWithDuration(viewAnimationTime, animations: { self.labelScore.frame = hide ? viewAnimateFrameTop : labelScoreFrame }){ _ in completion()}
+    }
+    
+    //MARK: Button Actions
+    
+    func newGameAction(sender: UIButton) {
+        hideLabelScore(true){}
+        shouldHideSnakeHead(true, duration: 1){}
+        hideButtonNewGame(viewAnimationTime){}
+        showSpeedButtons(viewAnimationTime){}
+    }
+    
+    func buttonSpeedAction(sender: UIButton) {
+        gameView.removeAllSubviews()
+        hideSpeedButtons(viewAnimationTime){self.startGame(Speed(rawValue: sender.currentTitle!)!)}
+    }
     
     // MARK: Game Logics
     
     func startGame (speed:Speed) {
-        
-        self.allocSnakeAndApple()
+        allocSnakeAndApple()
         didGameStart = true
         score = 0
         timer = NSTimer.scheduledTimerWithTimeInterval(speed.getSeconds(), target: self, selector: "timerMethod:", userInfo: nil, repeats: true)
@@ -117,20 +259,21 @@ class ViewController: UIViewController, GameViewDelegate {
     func timerMethod(sender:NSTimer) {
         self.snake!.move()
         self.checkSnakeStatus()
-        gameView!.setNeedsLayout()
+        gameView.setNeedsLayout()
     }
     
     func gameOver () {
         timer!.invalidate()
-        buttonNewGame.hidden = false
         didGameStart = false
-        setUpLabel()
+        labelScore.text = "Score : \(score)"
+        hideLabelScore(false){}
+        shouldHideSnakeHead(false, duration:1){self.showButtonNewGame(self.viewAnimationTime){}}
         
     }
     
     func allocSnakeAndApple() {
         snake = nil
-        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(160, 160, 16, 16))
+        snake = Snake(length: 4, direction: .south, snakeHeadRect: CGRectMake(snakeWidth * 10, snakeWidth * 10, snakeWidth, snakeWidth))
         self.plantNewApple()
     }
     
@@ -142,7 +285,7 @@ class ViewController: UIViewController, GameViewDelegate {
         apple = nil
         
         var randomX = Int(arc4random_uniform(UInt32(gameView!.frame.size.width - CGFloat(snake!.width))))
-        var randomY = Int(arc4random_uniform(UInt32(gameView!.frame.size.height-CGFloat(snake!.width))))
+        var randomY = Int(arc4random_uniform(UInt32(gameView!.frame.size.height - CGFloat(snake!.width))))
         
         randomX = randomX / snake!.width * snake!.width
         randomY = randomY / snake!.width * snake!.width
@@ -184,9 +327,15 @@ class ViewController: UIViewController, GameViewDelegate {
     }
     
     func didSnakeHitWall(point:CGPoint) -> Bool {
-        let wallWidth = Int(gameView!.frame.size.width) / snake!.width * snake!.width
-        let wallHeight = Int(gameView!.frame.size.height) / snake!.width * snake!.width
-        return point.x > CGFloat(wallWidth) || point.x < 0 || point.y > CGFloat(wallHeight) || point.y < 0
+        
+        func roundToNearestInt(CGF : CGFloat) -> Int {
+            let roundedInt = (CGF - CGFloat(Int(CGF)) < CGFloat(0.5)) ? Int(CGF) : Int(CGF + CGFloat(0.5))
+            return roundedInt
+        }
+        
+        let wallWidth = CGFloat(roundToNearestInt(screenWidth / snakeWidth)) * snakeWidth
+        let wallHeight = CGFloat(roundToNearestInt(screenHeight / snakeWidth)) * snakeWidth
+        return point.x >= wallWidth || point.x < 0 || point.y >= wallHeight || point.y < 0
     }
     
     func didSnakeHitBody(point:CGPoint) -> Bool {
@@ -222,7 +371,7 @@ class ViewController: UIViewController, GameViewDelegate {
     
     // MARK: Swipe Gesture
     
-    @IBAction func swipe(sender: UISwipeGestureRecognizer) {
+    func swipe(sender: UISwipeGestureRecognizer) {
         
         if (didGameStart == true) {
         switch sender.direction {
@@ -240,20 +389,16 @@ class ViewController: UIViewController, GameViewDelegate {
         }
     }
     
-
     // MARK: Delegate
     
     func snakeForGameView(gameView: GameView) -> Snake {
         return snake!
     }
-    
     func appleForGameView(gameView: GameView) -> Apple {
         return apple!
     }
-    
     func didGameStart(gameView:GameView) -> Bool {
         return didGameStart
     }
-    
 }
 

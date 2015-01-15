@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-class Apple {
+class Apple : UIView {
     
-    //Property
-    var frame : CGRect
-    
-    //Initailizer
-    init(frame:CGRect) {
-        self.frame = frame
+    override init(frame:CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 }

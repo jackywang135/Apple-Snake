@@ -127,4 +127,13 @@ class AppleAndSnakeTests: XCTestCase {
         XCTAssertEqual(snake.head.origin, CGPointMake(164, 100), "Did not grow at correct Point")
         
     }
+    
+    func testRoundingNumbers() {
+        func roundToNearestInt(float: Float) -> Int {
+            let rounded = float < Float(0.5) ? Float(0.5) : floorf(float * 2) / 2
+            return Int(rounded)
+        }
+        
+        XCTAssertEqual(CGFloat(roundToNearestInt(Float(CGFloat(375) / CGFloat(18)))) * CGFloat(18), CGFloat(378), "Not equal")
+    }
 }

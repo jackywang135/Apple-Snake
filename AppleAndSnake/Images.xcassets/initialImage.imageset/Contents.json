@@ -2,18 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "snakeBody.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "snakeBody-1.png"
+      "filename" : "iTunesArtwork@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "snakeBody-2.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

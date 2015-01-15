@@ -24,10 +24,16 @@ class GameView : UIView {
     //MARK: Properties
     
     var delegate : GameViewDelegate?
+    var imageHelper = ImageHelper()
     let kAppleLabelTag = 1
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     //MARK: Methods
@@ -38,7 +44,7 @@ class GameView : UIView {
         
         //MARK: Remove all subviews
         for view in self.subviews {
-            if (view is UIImageView || view.tag == kAppleLabelTag) {
+            if (view is UIImageView || view.tag? == 1) {
                 view.removeFromSuperview()
             }
         }
@@ -50,7 +56,7 @@ class GameView : UIView {
         var apple = delegate!.appleForGameView(self)
         
         //Snake Body
-        let snakeBodyImage = UIImage(named: "SnakeBody.png")
+        let snakeBodyImage = imageHelper.getSnakeBodyImage()
         for snakeBody in snake.body[1..<snake.length] {
             var snakeBodyImageView = UIImageView(frame: snakeBody)
             snakeBodyImageView.image = snakeBodyImage
@@ -58,7 +64,7 @@ class GameView : UIView {
         }
         
         //Snake Head
-        let snakeHeadImage = UIImage(named: "SnakeHead.png")
+        let snakeHeadImage = imageHelper.getSnakeHeadImage()
         var snakeHeadImageView = UIImageView(frame: snake.head)
         snakeHeadImageView.image = snakeHeadImage
         
@@ -76,19 +82,17 @@ class GameView : UIView {
         self.addSubview(snakeHeadImageView)
         
         //Draw Apple
-        let appleLabel = UILabel(frame: CGRectMake(apple.frame.origin.x, apple.frame.origin.y, apple.frame.size.width, apple.frame.size.height))
-            appleLabel.tag = kAppleLabelTag
-        appleLabel.attributedText = NSAttributedString.init(string: "🍎", attributes:[NSFontAttributeName : UIFont.systemFontOfSize(CGFloat(snake.width - 4))]) //-4 to prevent apple being cut off
+        let appleLabel = UILabel(frame: apple.frame)
+        appleLabel.tag = kAppleLabelTag
+        appleLabel.text = "🍎"
+        appleLabel.font = UIFont.systemFontOfSize(snakeWidth - 6)
         self.addSubview(appleLabel)
         }
     }
     
-//    override func drawRect(rect: CGRect) {
-//        let var appleStr = "🍎"
-//        
-//        
-//        
-//        
-//        
-//    }
+    func removeAllSubviews() {
+        for view in subviews {
+            view.removeFromSuperview()
+        }
+    }
 }
