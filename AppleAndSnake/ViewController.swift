@@ -8,6 +8,7 @@
 
 import UIKit
 import Darwin
+import GameKit
 
 enum Speed : String, Printable {
     case Slow = "Slow", Medium = "Medium", Fast = "Fast"
@@ -28,6 +29,17 @@ extension Speed {
             return 0.1
         case Fast:
             return 0.05
+        }
+    }
+    
+    func scoreConverter() -> Int {
+        switch self {
+        case Slow:
+            return 1
+        case Medium:
+            return 2
+        case Fast:
+            return 3
         }
     }
 }
@@ -74,7 +86,14 @@ class ViewController: UIViewController, GameViewDelegate {
     var apple : Apple?
     var timer : NSTimer?
     var score : Int!
+    var convertedScore : Int! {
+        get {
+            return score * gameSpeed.scoreConverter()
+        }
+    }
+    
     var didGameStart : Bool!
+    var gameSpeed : Speed!
     
     var swipeGestureUp : UISwipeGestureRecognizer!
     var swipeGestureDown : UISwipeGestureRecognizer!
@@ -93,7 +112,23 @@ class ViewController: UIViewController, GameViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
+        authenticatePlayer()
         setUpUI()
+    }
+    
+    func authenticatePlayer() {
+        let localPlayer = GKLocalPlayer.localPlayer()
+        localPlayer.authenticateHandler = { viewController, error in
+            if viewController != nil {
+                self.presentViewController(viewController!, animated: true, nil)
+            } else if localPlayer.authenticated == true {
+                localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler(){ string, error in
+                    if error != nil {
+                        NSLog("Authentication error: \(error.localizedDescription)")
+                    }
+                }
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -250,6 +285,7 @@ class ViewController: UIViewController, GameViewDelegate {
     // MARK: Game Logics
     
     func startGame (speed:Speed) {
+        gameSpeed = speed
         allocSnakeAndApple()
         didGameStart = true
         score = 0
@@ -265,7 +301,7 @@ class ViewController: UIViewController, GameViewDelegate {
     func gameOver () {
         timer!.invalidate()
         didGameStart = false
-        labelScore.text = "Score : \(score)"
+        labelScore.text = "Score : \(convertedScore)"
         hideLabelScore(false){}
         shouldHideSnakeHead(false, duration:1){self.showButtonNewGame(self.viewAnimationTime){}}
         
