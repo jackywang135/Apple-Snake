@@ -44,6 +44,8 @@ extension Speed {
     }
 }
 
+// MARK: Frame Definitions
+
 let snakeWidth = DeviceModel == .iPad ? CGFloat(32) : DeviceModel == .iPhone6 || DeviceModel == .iPhone6Plus ? CGFloat(18) : CGFloat(16)
 
 let buttonHeight = screenHeight/3
@@ -65,7 +67,7 @@ let snakeHeadImageViewShowFrame = CGRectMake(0, screenHeight - screenWidth, scre
 let snakeHeadImageViewHideFrame = CGRectMake(0, screenHeight, screenWidth, screenWidth)
 
 
-class ViewController: UIViewController, GameViewDelegate {
+class ViewController: UIViewController, GameViewDelegate, GKGameCenterControllerDelegate {
     
     // MARK: Properties
     var buttonNewGame: UIButton!
@@ -109,26 +111,11 @@ class ViewController: UIViewController, GameViewDelegate {
     
     // MARK: Methods
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: UIStatusBarAnimation.None)
-        authenticatePlayer()
         setUpUI()
-    }
-    
-    func authenticatePlayer() {
-        let localPlayer = GKLocalPlayer.localPlayer()
-        localPlayer.authenticateHandler = { viewController, error in
-            if viewController != nil {
-                self.presentViewController(viewController!, animated: true, nil)
-            } else if localPlayer.authenticated == true {
-                localPlayer.loadDefaultLeaderboardIdentifierWithCompletionHandler(){ string, error in
-                    if error != nil {
-                        NSLog("Authentication error: \(error.localizedDescription)")
-                    }
-                }
-            }
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -139,6 +126,8 @@ class ViewController: UIViewController, GameViewDelegate {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    //MARK: UI Set Up
     
     func setUpUI() {
         setUpSwipeGestures()
@@ -302,9 +291,12 @@ class ViewController: UIViewController, GameViewDelegate {
         timer!.invalidate()
         didGameStart = false
         labelScore.text = "Score : \(convertedScore)"
+        let reportScoreError = GameCenterManager.sharedManager.reportScore(convertedScore)
+        if reportScoreError != nil {
+            NSLog("Report Score Error: \(reportScoreError)")
+        }
         hideLabelScore(false){}
-        shouldHideSnakeHead(false, duration:1){self.showButtonNewGame(self.viewAnimationTime){}}
-        
+        shouldHideSnakeHead(false, duration:1){self.showButtonNewGame(self.viewAnimationTime){ GameCenterManager.sharedManager.showLeaderboard(self)}}
     }
     
     func allocSnakeAndApple() {
@@ -435,6 +427,12 @@ class ViewController: UIViewController, GameViewDelegate {
     }
     func didGameStart(gameView:GameView) -> Bool {
         return didGameStart
+    }
+    
+    //MARK: GameCenter ViewController Delegate 
+    
+    func gameCenterViewControllerDidFinish(gameCenterViewController: GKGameCenterViewController!) {
+        gameCenterViewController.dismissViewControllerAnimated(true, nil)
     }
 }
 

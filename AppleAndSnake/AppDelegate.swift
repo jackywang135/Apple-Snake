@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GameKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        let authenticateError = GameCenterManager.sharedManager.authenticatePlayer(self.window!.rootViewController! as ViewController)
+        if (authenticateError != nil) {
+            NSLog("Authentication Failure:\(authenticateError)")
+        }
         return true
     }
 

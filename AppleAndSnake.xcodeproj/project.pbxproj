@@ -13,6 +13,7 @@
 		C710AE2C19E3B71600B11C09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C710AE2A19E3B71600B11C09 /* Main.storyboard */; };
 		C710AE3D19E3B71600B11C09 /* AppleAndSnakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C710AE3C19E3B71600B11C09 /* AppleAndSnakeTests.swift */; };
 		C739467619F65AA7008847D2 /* Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739467519F65AA7008847D2 /* Apple.swift */; };
+		C74893621A6A5C8300E1618C /* GameCenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74893611A6A5C8300E1618C /* GameCenterManager.swift */; };
 		C755059E19F90A850023D87E /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059D19F90A850023D87E /* GameView.swift */; };
 		C75505A019F90B6C0023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
 		C75505A319F90BF00023D87E /* Snake.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755059F19F90B6C0023D87E /* Snake.swift */; };
@@ -43,6 +44,7 @@
 		C710AE3B19E3B71600B11C09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C710AE3C19E3B71600B11C09 /* AppleAndSnakeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAndSnakeTests.swift; sourceTree = "<group>"; };
 		C739467519F65AA7008847D2 /* Apple.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Apple.swift; sourceTree = "<group>"; };
+		C74893611A6A5C8300E1618C /* GameCenterManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameCenterManager.swift; sourceTree = "<group>"; };
 		C755059D19F90A850023D87E /* GameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		C755059F19F90B6C0023D87E /* Snake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Snake.swift; sourceTree = "<group>"; };
 		C75505A419F90C3B0023D87E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			children = (
 				C739467519F65AA7008847D2 /* Apple.swift */,
 				C755059F19F90B6C0023D87E /* Snake.swift */,
+				C74893611A6A5C8300E1618C /* GameCenterManager.swift */,
 				C7D97DE71A3981A6003D42FB /* Global.swift */,
 			);
 			name = Model;
@@ -258,6 +261,7 @@
 			files = (
 				C710AE2919E3B71600B11C09 /* ViewController.swift in Sources */,
 				C710AE2719E3B71600B11C09 /* AppDelegate.swift in Sources */,
+				C74893621A6A5C8300E1618C /* GameCenterManager.swift in Sources */,
 				C7D97DE81A3981A6003D42FB /* Global.swift in Sources */,
 				C75505A019F90B6C0023D87E /* Snake.swift in Sources */,
 				C78101FC1A3A91F300BF2138 /* AppleLabel.swift in Sources */,
