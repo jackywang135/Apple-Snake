@@ -43,18 +43,17 @@ class GameView : UIView {
         if delegate!.didGameStart(self) {
         
         //MARK: Remove all subviews
-        for view in self.subviews {
-            if (view is UIImageView || view.tag? == 1) {
-                view.removeFromSuperview()
-            }
-        }
+		self.subviews.filter(){ $0 is UIImageView || $0.tag == 1}.map(){$0.removeFromSuperview()}
     
         //MARK: Redraw subviews
         
         //Get Snake
         var snake = delegate!.snakeForGameView(self)
         var apple = delegate!.appleForGameView(self)
-        
+			
+			
+		let array = [Int]()
+		array.map { $0 * 2 }
         //Snake Body
         let snakeBodyImage = imageHelper.getSnakeBodyImage()
         for snakeBody in snake.body[1..<snake.length] {

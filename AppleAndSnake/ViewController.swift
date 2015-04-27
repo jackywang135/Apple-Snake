@@ -120,7 +120,7 @@ class ViewController: UIViewController, GameViewDelegate {
     }
     
     func setUpButtons() {
-        buttonNewGame = UIButton.buttonWithType(.Custom) as UIButton
+        buttonNewGame = UIButton.buttonWithType(.Custom) as! UIButton
         buttonNewGame.frame = buttonNewGameFrame
         buttonNewGame.setTitle("New Game", forState: .Normal)
         buttonNewGame.addTarget(self, action: "newGameAction:", forControlEvents: .TouchUpInside)
@@ -130,7 +130,7 @@ class ViewController: UIViewController, GameViewDelegate {
         view.addSubview(buttonNewGame)
         buttonNewGame.hidden = true
         
-        buttonSpeedSlow = UIButton.buttonWithType(.Custom) as UIButton
+        buttonSpeedSlow = UIButton.buttonWithType(.Custom) as! UIButton
         buttonSpeedSlow.frame = viewAnimateFrameTop
         buttonSpeedSlow.setTitle("Slow", forState: .Normal)
         buttonSpeedSlow.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
@@ -139,7 +139,7 @@ class ViewController: UIViewController, GameViewDelegate {
         buttonSpeedSlow.titleLabel!.font = UIFont(name: "HelveticaNeue", size: 50)
         view.addSubview(buttonSpeedSlow)
         
-        buttonSpeedMedium = UIButton.buttonWithType(.Custom) as UIButton
+        buttonSpeedMedium = UIButton.buttonWithType(.Custom) as! UIButton
         buttonSpeedMedium.frame = buttonSpeedMediumFrame
         buttonSpeedMedium.setTitle("Medium", forState: .Normal)
         buttonSpeedMedium.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
@@ -149,7 +149,7 @@ class ViewController: UIViewController, GameViewDelegate {
         view.addSubview(buttonSpeedMedium)
         buttonSpeedMedium.hidden = true
         
-        buttonSpeedFast = UIButton.buttonWithType(.Custom) as UIButton
+        buttonSpeedFast = UIButton.buttonWithType(.Custom) as! UIButton
         buttonSpeedFast.frame = viewAnimateFrameBottom
         buttonSpeedFast.setTitle("Fast", forState: .Normal)
         buttonSpeedFast.addTarget(self, action: "buttonSpeedAction:", forControlEvents: .TouchUpInside)
